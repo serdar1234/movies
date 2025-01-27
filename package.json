@@ -15,9 +15,9 @@
   },
   "lint-staged": {
     "src/*.{js,jsx}": [
-    "eslint \"src/**/*.{js,jsx}\" --fix",
-    "prettier --write \"src/**/*.{js,jsx}\""
-  ]
+      "npm run lint:fix",
+      "npm run format"
+    ]
   },
   "dependencies": {
     "react": "^18.3.1",
