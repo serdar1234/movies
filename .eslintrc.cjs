@@ -50,7 +50,7 @@ module.exports = {
   settings: {
     'import/resolver': {
       node: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx', '.svg'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.svg', '.png'],
         moduleDirectory: ['node_modules', 'src/'],
       },
       alias: {
@@ -58,8 +58,9 @@ module.exports = {
           ['@/', './src'],
           ['', './public'],
         ],
-        extensions: ['.js', '.jsx', '.svg'],
+        extensions: ['.js', '.jsx', '.svg', '.png'],
       },
+      vite: {},
     },
     react: {
       version: 'detect',

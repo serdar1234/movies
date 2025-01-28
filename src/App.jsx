@@ -19,11 +19,18 @@ const contentStyle = {
 function App() {
   return (
     <Row>
-      <Col span={18} offset={3}>
+      <Col
+        span={18}
+        offset={3}
+        style={{
+          minHeight: '100vh',
+          backgroundColor: 'white',
+        }}
+      >
         <Heading />
         <Content style={contentStyle}>
           <Row>
-            <Col span={12}>
+            <Col md={12} sm={24}>
               <Card
                 hoverable
                 style={{
@@ -34,7 +41,7 @@ function App() {
                 <Meta title="Europe Street beat" description="www.instagram.com" />
               </Card>
             </Col>
-            <Col span={12}>
+            <Col md={12} sm={24}>
               <Card
                 hoverable
                 style={{
