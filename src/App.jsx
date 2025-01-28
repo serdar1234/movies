@@ -1,35 +1,55 @@
-import { useState } from 'react';
+import React from 'react';
+import { Row, Col, Layout, Card } from 'antd';
 
-import reactLogo from './assets/react.svg';
-import viteLogo from './assets/vite.svg';
+import Heading from './components/Heading';
+import Pagination from './components/Pagination';
 
-import './App.css';
+import TestImg from '/asd.png';
+
+const { Content } = Layout;
+const { Meta } = Card;
+const contentStyle = {
+  textAlign: 'center',
+  minHeight: 120,
+  lineHeight: '120px',
+  color: '#fff',
+  backgroundColor: '#0958d9',
+};
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="Reacto logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button type="button" onClick={() => setCount((value) => value + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </>
+    <Row>
+      <Col span={18} offset={3}>
+        <Heading />
+        <Content style={contentStyle}>
+          <Row>
+            <Col span={12}>
+              <Card
+                hoverable
+                style={{
+                  width: 240,
+                }}
+                cover={<img alt="example" src={TestImg} />}
+              >
+                <Meta title="Europe Street beat" description="www.instagram.com" />
+              </Card>
+            </Col>
+            <Col span={12}>
+              <Card
+                hoverable
+                style={{
+                  width: 240,
+                }}
+                cover={<img alt="example" src={TestImg} />}
+              >
+                <Meta title="Europe Street beat" description="www.instagram.com" />
+              </Card>
+            </Col>
+          </Row>
+        </Content>
+        <Pagination />
+      </Col>
+    </Row>
   );
 }
-
 export default App;

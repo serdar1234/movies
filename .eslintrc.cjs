@@ -24,11 +24,19 @@ module.exports = {
     'linebreak-style': [0, 'unix'],
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
+    'import/no-unresolved': [
+      'error',
+      {
+        caseSensitive: false,
+        ignore: [
+          '\\.(png|jpe?g|gif|svg|webp|bmp|tiff)$', // don't check image imports
+        ],
+      },
+    ],
     'react/react-in-jsx-scope': 0,
     'react/prop-types': 0,
     'import/no-absolute-path': 0,
     'import/extensions': 0,
-    'import/no-unresolved': [2, { caseSensitive: false }],
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'import/order': [
       2,
@@ -38,7 +46,7 @@ module.exports = {
       },
     ],
   },
-  ignorePatterns: ['node_modules/', 'dist/', 'build/', 'coverage/', '.vscode/', 'vite.config.js'],
+  ignorePatterns: ['dist/', 'build/', 'coverage/', '.vscode/', 'vite.config.js'],
   settings: {
     'import/resolver': {
       node: {
