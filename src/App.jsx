@@ -1,19 +1,16 @@
 import React from 'react';
-import { Row, Col, Layout, Card } from 'antd';
+import { Row, Col, Layout } from 'antd';
 
 import Heading from './components/Heading';
+import MovieCard from './components/MovieCard';
 import Pagination from './components/Pagination';
 
-import TestImg from '/asd.png';
-
 const { Content } = Layout;
-const { Meta } = Card;
 const contentStyle = {
   textAlign: 'center',
   minHeight: 120,
   lineHeight: '120px',
-  color: '#fff',
-  backgroundColor: '#0958d9',
+  backgroundColor: 'white',
 };
 
 function App() {
@@ -31,26 +28,34 @@ function App() {
         <Content style={contentStyle}>
           <Row>
             <Col md={12} sm={24}>
-              <Card
-                hoverable
-                style={{
-                  width: 240,
-                }}
-                cover={<img alt="example" src={TestImg} />}
-              >
-                <Meta title="Europe Street beat" description="www.instagram.com" />
-              </Card>
+              <MovieCard />
             </Col>
             <Col md={12} sm={24}>
-              <Card
-                hoverable
-                style={{
-                  width: 240,
-                }}
-                cover={<img alt="example" src={TestImg} />}
-              >
-                <Meta title="Europe Street beat" description="www.instagram.com" />
-              </Card>
+              <MovieCard />
+            </Col>
+            <Col md={12} sm={24}>
+              <MovieCard />
+            </Col>
+            <Col md={12} sm={24}>
+              <MovieCard />
+            </Col>
+            <Col md={12} sm={24}>
+              <MovieCard />
+            </Col>
+            <Col md={12} sm={24}>
+              <MovieCard />
+            </Col>
+            <Col md={12} sm={24}>
+              <MovieCard />
+            </Col>
+            <Col md={12} sm={24}>
+              <MovieCard />
+            </Col>
+            <Col md={12} sm={24}>
+              <MovieCard />
+            </Col>
+            <Col md={12} sm={24}>
+              <MovieCard />
             </Col>
           </Row>
         </Content>
