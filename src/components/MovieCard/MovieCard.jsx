@@ -9,6 +9,7 @@ import TestImg from '/asd.jpg';
 import MovieFetcher from '../../services/MovieFetcher.js';
 
 import './MovieCard.css';
+
 const { Text } = Typography;
 
 function MovieCard() {
@@ -52,7 +53,13 @@ function MovieCard() {
   return (
     <>
       {loading && loader}
-      {error && <div className='error'><Text type="danger" strong>Error: {error}, try using a VPN</Text></div>}
+      {error && (
+        <div className="error">
+          <Text type="danger" strong>
+            Error: {error}, try using a VPN
+          </Text>
+        </div>
+      )}
       {movies.map((movie) => {
         let formattedReleaseDate = 'Unknown Release Date';
         if (movie.release_date) {
