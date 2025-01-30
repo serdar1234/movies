@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { useState, useEffect } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
-import { Tag, Col, Spin } from 'antd';
+import { Tag, Col, Spin, Typography } from 'antd';
 import { format } from 'date-fns';
 
 import TestImg from '/asd.jpg';
@@ -9,6 +9,7 @@ import TestImg from '/asd.jpg';
 import MovieFetcher from '../../services/MovieFetcher.js';
 
 import './MovieCard.css';
+const { Text } = Typography;
 
 function MovieCard() {
   const [movies, setMovies] = useState([]);
@@ -28,10 +29,10 @@ function MovieCard() {
           throw new Error('Fetched data is not an array');
         }
       } catch (e) {
-        setError(e.message); 
-        console.error('Error fetching movies:', e); 
+        setError(e.message);
+        console.error('Error fetching movies:', e);
       } finally {
-        setLoading(false); 
+        setLoading(false);
       }
     };
 
@@ -51,7 +52,7 @@ function MovieCard() {
   return (
     <>
       {loading && loader}
-      {error && <h1>Error: {error}</h1>}
+      {error && <div className='error'><Text type="danger" strong>Error: {error}, try using a VPN</Text></div>}
       {movies.map((movie) => {
         let formattedReleaseDate = 'Unknown Release Date';
         if (movie.release_date) {
