@@ -1,5 +1,3 @@
-/* eslint-disable no-nested-ternary */
-/* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable no-console */
 import { useState, useEffect } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
@@ -46,68 +44,46 @@ function MovieCard() {
     return `${shortStr}...`;
   }
 
+  const loader = (
+    <Spin
+      indicator={<LoadingOutlined spin />}
+      style={{
+        fontSize: 48,
+        marginInline: 'auto',
+      }}
+    />
+  );
+
   return (
     <>
-      {loading ? (
-        <Spin
-          indicator={<LoadingOutlined spin />}
-          style={{
-            fontSize: 48,
-            marginInline: 'auto',
-          }}
-        />
-      ) : error ? (
-        <h1>Error: {error}</h1>
-      ) : (
-        movies.map((dataX) => {
-          try {
-            const formattedReleaseDate = format(dataX.release_date, 'MMMM dd, yyyy');
-            return (
-              <Col md={12} sm={24} key={dataX.id}>
-                <div className="card">
-                  <div className="cardImg">
-                    <img
-                      src={`https://image.tmdb.org/t/p/w500${dataX.poster_path}`}
-                      alt={dataX.title}
-                      className="imgStyle"
-                    />
-                  </div>
-                  <div className="cardInfo">
-                    <h5>{truncateString(dataX.title, 35)}</h5>
-                    <div className="movieDate">{formattedReleaseDate}</div>
-                    <Tag>Action</Tag>
-                    <Tag>Drama</Tag>
-                    <p>{truncateString(dataX.overview)}</p>
-                  </div>
-                </div>
-              </Col>
-            );
-          } catch (e) {
-            console.log('Error formatting date:', e);
-            return (
-              <Col md={12} sm={24} key={dataX.id}>
-                <div className="card">
-                  <div className="cardImg">
-                    <img
-                      src={`https://image.tmdb.org/t/p/w500${dataX.poster_path}`}
-                      alt={dataX.title}
-                      // src={TestImg}
-                      className="imgStyle"
-                    />
-                  </div>
-                  <div className="cardInfo">
-                    <h5>{truncateString(dataX.title, 35)}</h5>
-                    <div className="movieDate">Unknown Release Date</div>
-                    <Tag>Action</Tag>
-                    <Tag>Drama</Tag>
-                    <p>{truncateString(dataX.overview)}</p>
-                  </div>
-                </div>
-              </Col>
-            );
-          }
-        })
-      )}
+      {loading && loader}
+      {error && <h1>Error: {error}</h1>}
+      {movies.map((movie) => {
+        let formattedReleaseDate = 'Unknown Release Date';
+        if (movie.release_date) {
+          formattedReleaseDate = format(movie.release_date, 'MMMM dd, yyyy');
+        }
+        return (
+          <Col md={12} sm={24} key={movie.id}>
+            <div className="card">
+              <div className="cardImg">
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  alt={movie.title}
+                  className="imgStyle"
+                />
+              </div>
+              <div className="cardInfo">
+                <h5>{truncateString(movie.title, 35)}</h5>
+                <div className="movieDate">{formattedReleaseDate}</div>
+                <Tag>Action</Tag>
+                <Tag>Drama</Tag>
+                <p>{truncateString(movie.overview)}</p>
+              </div>
+            </div>
+          </Col>
+        );
+      })}
     </>
   );
 }
