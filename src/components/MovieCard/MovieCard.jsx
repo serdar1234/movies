@@ -4,7 +4,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { Tag, Col, Spin } from 'antd';
 import { format } from 'date-fns';
 
-// import TestImg from '/asd.jpg';
+import TestImg from '/asd.jpg';
 
 import MovieFetcher from '../../services/MovieFetcher.js';
 
@@ -14,6 +14,8 @@ function MovieCard() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [imgLoaded, setImgLoaded] = useState(false);
+  const [imgError, setImgError] = useState(false);
 
   const query = 'return';
   useEffect(() => {
@@ -26,10 +28,10 @@ function MovieCard() {
           throw new Error('Fetched data is not an array');
         }
       } catch (e) {
-        setError(e.message); // Set error state
-        console.error('Error fetching movies:', e); // Log the error
+        setError(e.message); 
+        console.error('Error fetching movies:', e); 
       } finally {
-        setLoading(false); // Stop loading
+        setLoading(false); 
       }
     };
 
@@ -44,15 +46,7 @@ function MovieCard() {
     return `${shortStr}...`;
   }
 
-  const loader = (
-    <Spin
-      indicator={<LoadingOutlined spin />}
-      style={{
-        fontSize: 48,
-        marginInline: 'auto',
-      }}
-    />
-  );
+  const loader = <Spin indicator={<LoadingOutlined spin />} size="large" />;
 
   return (
     <>
@@ -67,10 +61,15 @@ function MovieCard() {
           <Col md={12} sm={24} key={movie.id}>
             <div className="card">
               <div className="cardImg">
+                {!imgLoaded && !imgError && loader}
+                {imgError && <img src={TestImg} alt="Woman in Red" className="imgStyle" />}
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  onLoad={() => setImgLoaded(true)}
+                  onError={() => setImgError(true)}
                   alt={movie.title}
                   className="imgStyle"
+                  style={{ display: imgLoaded ? 'block' : 'none' }}
                 />
               </div>
               <div className="cardInfo">
