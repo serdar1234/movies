@@ -6,6 +6,8 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { Tag, Col, Spin } from 'antd';
 import { format } from 'date-fns';
 
+// import TestImg from '/asd.jpg';
+
 import MovieFetcher from '../../services/MovieFetcher.js';
 
 import './MovieCard.css';
@@ -81,7 +83,7 @@ function MovieCard() {
               </Col>
             );
           } catch (e) {
-            console.error('Error formatting date:', e);
+            console.log('Error formatting date:', e);
             return (
               <Col md={12} sm={24} key={dataX.id}>
                 <div className="card">
@@ -89,6 +91,7 @@ function MovieCard() {
                     <img
                       src={`https://image.tmdb.org/t/p/w500${dataX.poster_path}`}
                       alt={dataX.title}
+                      // src={TestImg}
                       className="imgStyle"
                     />
                   </div>
