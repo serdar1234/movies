@@ -68,7 +68,7 @@ function MovieCard() {
           formattedReleaseDate = format(movie.release_date, 'MMMM dd, yyyy');
         }
         return (
-          <Col md={12} sm={24} key={movie.id}>
+          <Col lg={12} md={24} key={movie.id}>
             <div className="card">
               <div className="cardImg">
                 {!imgLoaded && !imgError && loader}

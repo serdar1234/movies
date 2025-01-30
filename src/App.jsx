@@ -17,8 +17,8 @@ function App() {
   return (
     <Row>
       <Col
-        span={18}
-        offset={3}
+        lg={{ span: 24, offset: 0 }}
+        xl={{ span: 18, offset: 3 }}
         style={{
           minHeight: '100vh',
           backgroundColor: 'white',
