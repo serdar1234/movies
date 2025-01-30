@@ -1,5 +1,5 @@
 export default class MovieFetcher {
-  async getMovies(query) {
+  static async getMovies(query) {
     const fetchOptions = {
       method: 'GET',
       headers: {
@@ -19,12 +19,8 @@ export default class MovieFetcher {
     return res.json();
   }
 
-  async getData(query) {
+  static async getData(query) {
     const res = await this.getMovies(query);
-    const dataArr = [];
-    dataArr.push(res.results[0].title);
-    dataArr.push(res.results[0].overview);
-    dataArr.push(res.results[0].poster_path);
-    return dataArr;
+    return res.results.slice(0, 10);
   }
 }

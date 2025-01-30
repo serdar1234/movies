@@ -27,36 +27,7 @@ function App() {
         <Heading />
         <Content style={contentStyle}>
           <Row>
-            <Col md={12} sm={24}>
-              <MovieCard />
-            </Col>
-            <Col md={12} sm={24}>
-              <MovieCard />
-            </Col>
-            <Col md={12} sm={24}>
-              <MovieCard />
-            </Col>
-            <Col md={12} sm={24}>
-              <MovieCard />
-            </Col>
-            <Col md={12} sm={24}>
-              <MovieCard />
-            </Col>
-            <Col md={12} sm={24}>
-              <MovieCard />
-            </Col>
-            <Col md={12} sm={24}>
-              <MovieCard />
-            </Col>
-            <Col md={12} sm={24}>
-              <MovieCard />
-            </Col>
-            <Col md={12} sm={24}>
-              <MovieCard />
-            </Col>
-            <Col md={12} sm={24}>
-              <MovieCard />
-            </Col>
+            <MovieCard />
           </Row>
         </Content>
         <Pagination />

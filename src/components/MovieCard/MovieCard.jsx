@@ -1,42 +1,96 @@
-import { useState } from 'react';
-import { Tag } from 'antd';
+/* eslint-disable no-nested-ternary */
+import { useState, useEffect } from 'react';
+import { Tag, Col } from 'antd';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { format } from 'date-fns';
 
 import MovieFetcher from '../../services/MovieFetcher.js';
 
-import TestImg from '/asd.png';
 import './MovieCard.css';
 
 function MovieCard() {
-  const [posterImage, setImage] = useState(TestImg);
-  const [cardTitle, setTitle] = useState(null);
-  const [cardText, setText] = useState(null);
+  const [dataY, setData] = useState([]); // Initialize as an array
+  const [loading, setLoading] = useState(true); // State to track loading status
+  const [error, setError] = useState(null); // State to track any errors
 
-  const movieGetter = new MovieFetcher();
-  const updateTitle = () => {
-    movieGetter.getData('return').then((data) => {
-      setTitle(data[0]);
-      setText(data[1]);
-      setImage(`https://image.tmdb.org/t/p/w500${data[2]}`);
-    });
-  };
-  updateTitle();
+  useEffect(() => {
+    const updateTitle = async () => {
+      try {
+        const data = await MovieFetcher.getData('return');
+        if (Array.isArray(data)) {
+          setData(data); // Ensure we're setting an array
+        } else {
+          throw new Error('Fetched data is not an array');
+        }
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error('Error fetching movies:', e);
+        setError(error.message); // Set error state
+      } finally {
+        setLoading(false); // Stop loading
+      }
+    };
+
+    updateTitle();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Empty dependency array for running once on mount
   return (
-    <div className="card">
-      <div className="cardImg">
-        <img src={posterImage} alt="test" className="imgStyle" />
-      </div>
-      <div className="cardInfo">
-        <h5>{cardTitle}</h5>
-        <div className="movieDate">March 5, 2020</div>
-        <Tag>Action</Tag>
-        <Tag>Drama</Tag>
-        <p>
-          {cardText}
-          {/* A former basketball all-star, who has lost his wife and family foundation in a struggle with addiction
-          attempts to regain his soul and salvation by becoming the coach of a disparate ethnically mixed high ... */}
-        </p>
-      </div>
-    </div>
+    // eslint-disable-next-line react/jsx-no-useless-fragment
+    <>
+      {loading ? (
+        <h1>Loading...</h1>
+      ) : error ? (
+        <h1>Error: {error}</h1>
+      ) : (
+        dataY.map((dataX) => {
+          try {
+            const formattedReleaseDate = format(dataX.release_date, 'MMMM dd, yyyy');
+            return (
+              <Col md={12} sm={24} key={dataX.id}>
+                <div className="card">
+                  <div className="cardImg">
+                    <img
+                      src={`https://image.tmdb.org/t/p/w500${dataX.poster_path}`}
+                      alt={dataX.title}
+                      className="imgStyle"
+                    />
+                  </div>
+                  <div className="cardInfo">
+                    <h5>{dataX.title}</h5>
+                    <div className="movieDate">{formattedReleaseDate}</div>
+                    <Tag>Action</Tag>
+                    <Tag>Drama</Tag>
+                    <p>{dataX.overview}</p>
+                  </div>
+                </div>
+              </Col>
+            );
+          } catch (e) {
+            console.error('Error formatting date:', e);
+            return (
+              <Col md={12} sm={24} key={dataX.id}>
+                <div className="card">
+                  <div className="cardImg">
+                    <img
+                      src={`https://image.tmdb.org/t/p/w500${dataX.poster_path}`}
+                      alt={dataX.title}
+                      className="imgStyle"
+                    />
+                  </div>
+                  <div className="cardInfo">
+                    <h5>{dataX.title}</h5>
+                    <div className="movieDate">Unknown Release Date</div>
+                    <Tag>Action</Tag>
+                    <Tag>Drama</Tag>
+                    <p>{dataX.overview}</p>
+                  </div>
+                </div>
+              </Col>
+            );
+          }
+        })
+      )}
+    </>
   );
 }
 
