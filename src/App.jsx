@@ -1,32 +1,28 @@
 import React from 'react';
 import { Row, Col, Layout } from 'antd';
 
+import OnlineStatus from './services/OnlineStatus';
 import Heading from './components/Heading';
 import MovieCard from './components/MovieCard';
 import Pagination from './components/Pagination';
 
 const { Content } = Layout;
-const contentStyle = {
-  textAlign: 'center',
-  minHeight: 120,
-  lineHeight: '120px',
-  backgroundColor: 'white',
-};
 
 function App() {
   return (
-    <Row>
+    <Row justify="space-around">
       <Col
-        lg={{ span: 24, offset: 0 }}
-        xl={{ span: 18, offset: 3 }}
+        lg={{ span: 24 }}
+        xl={{ span: 18 }}
         style={{
           minHeight: '100vh',
           backgroundColor: 'white',
         }}
       >
         <Heading />
-        <Content style={contentStyle}>
-          <Row>
+        <OnlineStatus />
+        <Content>
+          <Row justify="space-around" align="middle">
             <MovieCard />
           </Row>
         </Content>

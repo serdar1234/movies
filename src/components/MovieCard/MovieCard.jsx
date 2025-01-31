@@ -1,16 +1,12 @@
-/* eslint-disable no-console */
 import { useState, useEffect } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
-import { Tag, Col, Spin, Typography } from 'antd';
+import { Tag, Col, Spin, Alert } from 'antd';
 import { format } from 'date-fns';
 
 import TestImg from '/asd.jpg';
 
 import MovieFetcher from '../../services/MovieFetcher.js';
-
 import './MovieCard.css';
-
-const { Text } = Typography;
 
 function MovieCard() {
   const [movies, setMovies] = useState([]);
@@ -27,14 +23,15 @@ function MovieCard() {
         if (Array.isArray(data)) {
           setMovies(data);
         } else {
-          throw new Error('Fetched data is not an array');
+          return <Alert message="Fetched data is not an array" type="error" closable />;
         }
       } catch (e) {
         setError(e.message);
-        console.error('Error fetching movies:', e);
+        return <Alert message={`Error fetching movies: ${e.message}`} type="error" closable />;
       } finally {
         setLoading(false);
       }
+      return 0;
     };
 
     updateTitle();
@@ -57,9 +54,7 @@ function MovieCard() {
       {loading && <div className="error">{loader}</div>}
       {error && (
         <div className="error">
-          <Text type="danger" strong>
-            Error: {error}, try using a VPN
-          </Text>
+          <Alert message={`Error: ${error}`} type="error" closable />
         </div>
       )}
       {movies.map((movie) => {

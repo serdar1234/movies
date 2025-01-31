@@ -21,6 +21,6 @@ export default class MovieFetcher {
 
   static async getData(query) {
     const res = await this.getMovies(query);
-    return res.results.slice(0, 10);
+    return res.results.slice(0, 6);
   }
 }

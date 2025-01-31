@@ -54,6 +54,5 @@
   text-align: left;
 }
 .error {
-  width: 100%;
-  text-align: center;
+  padding-block: 16px;
 }
