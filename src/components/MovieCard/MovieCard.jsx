@@ -15,7 +15,7 @@ function MovieCard() {
   const [imgLoaded, setImgLoaded] = useState(false);
   const [imgError, setImgError] = useState(false);
 
-  const query = 'return';
+  const query = 'Vanya';
   useEffect(() => {
     const updateTitle = async () => {
       try {
