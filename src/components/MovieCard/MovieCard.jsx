@@ -6,12 +6,13 @@ import { format } from 'date-fns';
 import TestImg from '/asd.jpg';
 
 import MovieFetcher from '../../services/MovieFetcher.js';
+import truncateString from '../../services/truncateString.js';
 import './MovieCard.css';
 
 function MovieCard() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
   const [imgLoaded, setImgLoaded] = useState(false);
   const [imgError, setImgError] = useState(false);
 
@@ -26,7 +27,7 @@ function MovieCard() {
           return <Alert message="Fetched data is not an array" type="error" closable />;
         }
       } catch (e) {
-        setError(e.message);
+        setErrorMessage(e.message);
         return <Alert message={`Error fetching movies: ${e.message}`} type="error" closable />;
       } finally {
         setLoading(false);
@@ -35,26 +36,16 @@ function MovieCard() {
     };
 
     updateTitle();
-  }, [query, setError, setMovies, setLoading]);
+  }, [query, setErrorMessage, setMovies, setLoading]);
 
-  function truncateString(str, max = 200) {
-    if (str.length <= max) return str;
-
-    let shortStr = str.slice(0, max);
-    const lastSpaceIdx = shortStr.lastIndexOf(' ');
-    shortStr = shortStr.slice(0, lastSpaceIdx);
-
-    return `${shortStr}...`;
-  }
-
-  const loader = <Spin indicator={<LoadingOutlined spin />} size="large" />;
+  const spinner = <Spin indicator={<LoadingOutlined spin />} size="large" />;
 
   return (
     <>
-      {loading && <div className="error">{loader}</div>}
-      {error && (
+      {loading && <div className="error">{spinner}</div>}
+      {errorMessage && (
         <div className="error">
-          <Alert message={`Error: ${error}`} type="error" closable />
+          <Alert message={`Error: ${errorMessage}`} type="error" closable />
         </div>
       )}
       {movies.map((movie) => {
@@ -66,10 +57,10 @@ function MovieCard() {
           <Col lg={12} md={24} key={movie.id}>
             <div className="card">
               <div className="cardImg">
-                {!imgLoaded && !imgError && loader}
+                {!imgLoaded && !imgError && spinner}
                 {imgError && <img src={TestImg} alt="Woman in Red" className="imgStyle" />}
                 <img
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  src={`http://image.tmdb.org/t/p/w342${movie.poster_path}`}
                   onLoad={() => setImgLoaded(true)}
                   onError={() => setImgError(true)}
                   alt={movie.title}
