@@ -13,10 +13,11 @@ function MovieCard() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [imgLoaded, setImgLoaded] = useState(false);
-  const [imgError, setImgError] = useState(false);
+  const [imgStates, setImgStates] = useState({});
 
-  const query = 'return';
+  const spinner = <Spin indicator={<LoadingOutlined spin />} size="large" />;
+
+  const query = 'Vanya';
   useEffect(() => {
     const updateTitle = async () => {
       try {
@@ -38,8 +39,6 @@ function MovieCard() {
     updateTitle();
   }, [query, setErrorMessage, setMovies, setLoading]);
 
-  const spinner = <Spin indicator={<LoadingOutlined spin />} size="large" />;
-
   return (
     <>
       {loading && <div className="error">{spinner}</div>}
@@ -53,6 +52,10 @@ function MovieCard() {
         if (movie.release_date) {
           formattedReleaseDate = format(movie.release_date, 'MMMM dd, yyyy');
         }
+
+        const imgLoaded = imgStates[movie.id] && imgStates[movie.id].loaded ? imgStates[movie.id].loaded : false;
+        const imgError = imgStates[movie.id] && imgStates[movie.id].error ? imgStates[movie.id].error : false;
+
         return (
           <Col md={12} sm={24} key={movie.id}>
             <div className="card">
@@ -61,8 +64,8 @@ function MovieCard() {
                 {imgError && <img src={fallbackImg} alt="Fallback" className="imgStyle" />}
                 <img
                   src={`http://image.tmdb.org/t/p/w342${movie.poster_path}`}
-                  onLoad={() => setImgLoaded(true)}
-                  onError={() => setImgError(true)}
+                  onLoad={() => setImgStates((prev) => ({ ...prev, [movie.id]: { loaded: true, error: false } }))}
+                  onError={() => setImgStates((prev) => ({ ...prev, [movie.id]: { loaded: false, error: true } }))}
                   alt={movie.title}
                   className="imgStyle"
                   style={{ display: imgLoaded ? 'block' : 'none' }}
