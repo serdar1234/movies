@@ -1,58 +1,137 @@
 .card {
-  display: flex;
-  background: white;
+  display: grid;
+  grid-template-columns: 40% 1fr 40px;
+  grid-template-rows: 15% 9% 9% 52% 15%;
+  overflow: hidden;
+  grid-auto-flow: column dense;
   font-family: 'Inter';
   color: black;
-  border-radius: 0;
   margin: 16px;
   padding: 0;
   line-height: normal;
-  text-align: start;
-  aspect-ratio: 1.62/1;
   box-shadow: 0 4px 12px 0 #ccc;
 }
 
 .imgStyle {
   width: 100%;
-  height: auto;
-  border-radius: 0;
+  height: 100%;
 }
 
 .cardImg {
-  flex: 0 0 40%;
+  grid-column: 1 / 2;
+  grid-row: 1 / 6;
   align-content: center;
   text-align: center;
   overflow: hidden;
 }
 
 .cardInfo {
-  padding: 10px;
-  padding-left: 20px;
+  grid-column: 2 / 3;
+  grid-row: 1 / 4;
+}
+
+.cardInfo > * {
+  text-align: start;
+  padding-inline-start: 20px;
 }
 
 .card h5 {
-  margin: 0;
+  margin-block: 10px;
   font-size: 20px;
   font-weight: 400;
   line-height: 28px;
   text-align: left;
 }
 
-.card p {
-  font-family: Inter;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 22px;
-}
-
 .movieDate {
-  margin-block: 8px;
   font-family: Inter;
   font-size: 12px;
   font-weight: 400;
   line-height: 22px;
   text-align: left;
 }
+
+.tags {
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.52px;
+  text-align: left;
+  margin-block: 10px;
+}
+
+.movieDescription {
+  grid-column: 2 / 4;
+  grid-row: 4 / 6;
+  margin-inline: 20px;
+}
+
+.movieDescription p {
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 22px;
+  text-align: left;
+}
+
+.ratingStars {
+  grid-row: 5 / 6;
+  margin-block: 8px;
+  text-align: center;
+}
+
+.star {
+  font-size: 1.2em;
+  color: silver;
+}
+
+.star.filled {
+  color: gold;
+}
+
 .error {
   padding-block: 16px;
+}
+
+@media (max-width: 575px) {
+  .card {
+    grid-template-columns: 70px 1fr 40px;
+    grid-template-rows: 20% 10% 10% 50% 10%;
+    overflow: hidden;
+    grid-auto-flow: column dense;
+  }
+
+  .imgStyle {
+    width: 60px;
+    height: 91px;
+  }
+
+  .cardImg {
+    grid-column: 1 / 2;
+    grid-row: 1 / 4;
+    margin: 10px;
+  }
+
+  .cardInfo {
+    grid-column: 2 / 3;
+    grid-row: 1 / 4;
+  }
+
+  .cardInfo > * {
+    padding-inline-start: 13px;
+  }
+
+  .tags {
+    margin-block: 5px;
+  }
+
+  .movieDescription {
+    grid-column: 1 / 4;
+    grid-row: 4 / 6;
+    margin-inline: 10px;
+  }
+
+  .ratingStars {
+    text-align: right;
+  }
 }

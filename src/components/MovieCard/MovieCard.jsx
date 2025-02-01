@@ -3,7 +3,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { Tag, Col, Spin, Alert } from 'antd';
 import { format } from 'date-fns';
 
-import TestImg from '/asd.jpg';
+import fallbackImg from '/asd.jpg';
 
 import MovieFetcher from '../../services/MovieFetcher.js';
 import truncateString from '../../services/truncateString.js';
@@ -16,7 +16,7 @@ function MovieCard() {
   const [imgLoaded, setImgLoaded] = useState(false);
   const [imgError, setImgError] = useState(false);
 
-  const query = 'Vanya';
+  const query = 'return';
   useEffect(() => {
     const updateTitle = async () => {
       try {
@@ -58,7 +58,7 @@ function MovieCard() {
             <div className="card">
               <div className="cardImg">
                 {!imgLoaded && !imgError && spinner}
-                {imgError && <img src={TestImg} alt="Woman in Red" className="imgStyle" />}
+                {imgError && <img src={fallbackImg} alt="Fallback" className="imgStyle" />}
                 <img
                   src={`http://image.tmdb.org/t/p/w342${movie.poster_path}`}
                   onLoad={() => setImgLoaded(true)}
@@ -71,9 +71,16 @@ function MovieCard() {
               <div className="cardInfo">
                 <h5>{truncateString(movie.title, 35)}</h5>
                 <div className="movieDate">{formattedReleaseDate}</div>
-                <Tag>Action</Tag>
-                <Tag>Drama</Tag>
+                <div className="tags">
+                  <Tag>Action</Tag>
+                  <Tag>Drama</Tag>
+                </div>
+              </div>
+              <div className="movieDescription">
                 <p>{truncateString(movie.overview)}</p>
+                <div className="ratingStars">
+                  <span className="star filled"> ★★★★★★★★ </span>
+                </div>
               </div>
             </div>
           </Col>
