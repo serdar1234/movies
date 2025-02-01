@@ -54,7 +54,7 @@ function MovieCard() {
           formattedReleaseDate = format(movie.release_date, 'MMMM dd, yyyy');
         }
         return (
-          <Col lg={12} md={24} key={movie.id}>
+          <Col md={12} sm={24} key={movie.id}>
             <div className="card">
               <div className="cardImg">
                 {!imgLoaded && !imgError && spinner}
@@ -75,6 +75,9 @@ function MovieCard() {
                   <Tag>Action</Tag>
                   <Tag>Drama</Tag>
                 </div>
+              </div>
+              <div className="movieRating">
+                <span>{6.6}</span>
               </div>
               <div className="movieDescription">
                 <p>{truncateString(movie.overview)}</p>
