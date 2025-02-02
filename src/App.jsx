@@ -1,10 +1,10 @@
 import React from 'react';
 import { Row, Col, Layout } from 'antd';
 
+import HeadingBlock from './components/HeadingBlock';
 import OnlineStatus from './services/OnlineStatus';
-import Heading from './components/Heading';
 import MovieCard from './components/MovieCard';
-import Pagination from './components/Pagination';
+import PaginationBlock from './components/PaginationBlock';
 
 const { Content } = Layout;
 
@@ -19,14 +19,14 @@ function App() {
           backgroundColor: 'white',
         }}
       >
-        <Heading />
+        <HeadingBlock />
         <OnlineStatus />
         <Content>
           <Row justify="space-around" align="middle">
             <MovieCard />
           </Row>
         </Content>
-        <Pagination />
+        <PaginationBlock />
       </Col>
     </Row>
   );
