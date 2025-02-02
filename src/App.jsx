@@ -11,7 +11,8 @@ const { Content } = Layout;
 
 function App() {
   const [query, setQuery] = useState('');
-  console.log(query);
+  const [paginationInfo, setPaginationInfo] = useState({ page: 1, totalPages: 0 });
+
   return (
     <Row justify="space-around">
       <Col
@@ -26,10 +27,10 @@ function App() {
         <OnlineStatus />
         <Content>
           <Row justify="space-between" align="middle">
-            <MovieCard query={query} />
+            <MovieCard query={query} pages={paginationInfo} setPages={(p) => setPaginationInfo(p)} />
           </Row>
         </Content>
-        <PaginationBlock />
+        <PaginationBlock totalPages={paginationInfo.totalPages} onPageChange={(p) => setPaginationInfo(p)} />
       </Col>
     </Row>
   );
