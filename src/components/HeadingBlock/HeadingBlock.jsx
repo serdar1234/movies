@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import { Layout, Input, Tabs } from 'antd';
+import { debounce } from 'lodash';
 
 const { Search } = Input;
 const { Header } = Layout;
@@ -26,11 +27,15 @@ const tabStyle = {
   marginTop: '10px',
 };
 
-function HeadingBlock() {
+function HeadingBlock({ onQueryChange }) {
+  const onChangeFn = debounce((evt) => {
+    onQueryChange(evt.target.value);
+  }, 500);
+
   return (
     <Header style={headerStyle}>
       <Tabs defaultActiveKey="1" centered tabBarStyle={tabStyle} items={items} onChange={() => console.log('tabs')} />
-      <Search placeholder="Type to search" onSearch={() => console.log('search')} enterButton />
+      <Search placeholder="Type to search" onChange={onChangeFn} onSearch={() => console.log('search')} enterButton />
     </Header>
   );
 }

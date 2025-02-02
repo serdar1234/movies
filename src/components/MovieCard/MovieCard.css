@@ -15,12 +15,15 @@
 .imgStyle {
   width: 100%;
   height: auto;
+  align-self: flex-start;
 }
 
 .cardImg {
   grid-column: 1 / 2;
   grid-row: 1 / 6;
-  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
   overflow: hidden;
 }
 
@@ -50,17 +53,15 @@
   margin: 10px;
   border: 2px solid #e9d100;
   border-radius: 50%;
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .movieRating > span {
   font-size: 12px;
   font-weight: 400;
   line-height: 22px;
-  text-align: left;
-  position: absolute;
-  top: 4px;
-  left: 6px;
 }
 
 .movieDate {
@@ -82,11 +83,11 @@
 
 .movieDescription {
   grid-column: 2 / 4;
-  grid-row: 4 / 6;
-  margin-inline: 20px;
+  grid-row: 4 / 5;
 }
 
 .movieDescription p {
+  margin-inline: 20px;
   font-family: Inter;
   font-size: 12px;
   font-weight: 400;
@@ -95,22 +96,23 @@
 }
 
 .ratingStars {
+  grid-column: 2 / 4;
   grid-row: 5 / 6;
   margin-block: 8px;
   text-align: center;
 }
 
-.star {
-  font-size: 1.2em;
-  color: silver;
-}
-
-.star.filled {
-  color: gold;
-}
-
 .error {
   padding-block: 16px;
+}
+
+@media (max-width: 900px) {
+  .cardImg {
+    grid-row: 1 / 5;
+  }
+  .ratingStars {
+    grid-column: 1 / 4;
+  }
 }
 
 @media (max-width: 575px) {
@@ -127,7 +129,6 @@
   }
 
   .cardImg {
-    grid-column: 1 / 2;
     grid-row: 1 / 4;
     margin: 10px;
   }
@@ -147,7 +148,7 @@
 
   .movieDescription {
     grid-column: 1 / 4;
-    grid-row: 4 / 6;
+    grid-row: 4 / 5;
     margin-inline: 10px;
   }
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
-import { Tag, Col, Spin, Alert } from 'antd';
+import { Tag, Col, Spin, Alert, Rate } from 'antd';
 import { format } from 'date-fns';
 
 import fallbackImg from '/asd.jpg';
@@ -9,7 +9,7 @@ import MovieFetcher from '../../services/MovieFetcher.js';
 import truncateString from '../../services/truncateString.js';
 import './MovieCard.css';
 
-function MovieCard() {
+function MovieCard({ query }) {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -17,7 +17,6 @@ function MovieCard() {
 
   const spinner = <Spin indicator={<LoadingOutlined spin />} size="large" />;
 
-  const query = 'Vanya';
   useEffect(() => {
     const updateTitle = async () => {
       try {
@@ -72,7 +71,7 @@ function MovieCard() {
                 />
               </div>
               <div className="cardInfo">
-                <h5>{truncateString(movie.title, 35)}</h5>
+                <h5>{truncateString(movie.title, 25)}</h5>
                 <div className="movieDate">{formattedReleaseDate}</div>
                 <div className="tags">
                   <Tag>Action</Tag>
@@ -80,13 +79,13 @@ function MovieCard() {
                 </div>
               </div>
               <div className="movieRating">
-                <span>{6.6}</span>
+                <span>{Math.round(movie.popularity * 10) / 10}</span>
               </div>
               <div className="movieDescription">
                 <p>{truncateString(movie.overview)}</p>
-                <div className="ratingStars">
-                  <span className="star filled"> ★★★★★★★★ </span>
-                </div>
+              </div>
+              <div className="ratingStars">
+                <Rate allowHalf style={{ fontSize: '16px' }} count={10} />
               </div>
             </div>
           </Col>

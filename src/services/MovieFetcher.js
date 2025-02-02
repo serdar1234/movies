@@ -1,5 +1,5 @@
 export default class MovieFetcher {
-  static async getMovies(query) {
+  static async getMovies(query, page) {
     const fetchOptions = {
       method: 'GET',
       headers: {
@@ -9,7 +9,7 @@ export default class MovieFetcher {
       },
     };
     const res = await fetch(
-      `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`,
+      `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=${page}`,
       fetchOptions
     );
 
@@ -19,8 +19,8 @@ export default class MovieFetcher {
     return res.json();
   }
 
-  static async getData(query) {
-    const res = await this.getMovies(query);
+  static async getData(query, page = 1) {
+    const res = await this.getMovies(query, page);
     return res.results.slice(0, 6);
   }
 }
