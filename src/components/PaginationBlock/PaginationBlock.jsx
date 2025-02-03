@@ -2,19 +2,21 @@ import { Layout, Pagination } from 'antd';
 
 const { Footer } = Layout;
 
-function PaginationBlock({ onPageChange, totalPages }) {
-  const changePage = (page) => {
-    if (page > totalPages) onPageChange({ page: 1, totalPages });
-    else onPageChange({ page, totalPages });
+function PaginationBlock({ onPageChange, paginationInfo }) {
+  const { page, totalPages } = paginationInfo;
+
+  const changePage = (p) => {
+    onPageChange((prev) => ({ ...prev, page: p }));
   };
+
   return (
     <Footer style={{ backgroundColor: 'white' }}>
       <Pagination
         align="center"
         pageSize={20}
-        onChange={(page) => changePage(page)}
+        current={page}
+        onChange={changePage}
         showSizeChanger={false}
-        defaultCurrent={1}
         total={totalPages}
       />
     </Footer>

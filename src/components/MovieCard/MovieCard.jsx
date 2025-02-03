@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
-import { Tag, Col, Spin, Alert, Rate } from 'antd';
+import { Tag, Spin, Alert, Rate } from 'antd';
 import { format } from 'date-fns';
 
 import fallbackImg from '/asd.jpg';
@@ -48,7 +48,7 @@ function MovieCard({ query, pages, setPages }) {
         </div>
       )}
       {movies.results &&
-        movies.results.map((movie) => {
+        movies.results.slice(0, 4).map((movie) => {
           let formattedReleaseDate = 'Unknown Release Date';
           if (movie.release_date) {
             formattedReleaseDate = format(movie.release_date, 'MMMM dd, yyyy');
@@ -58,39 +58,37 @@ function MovieCard({ query, pages, setPages }) {
           const imgError = imgStates[movie.id] && imgStates[movie.id].error ? imgStates[movie.id].error : false;
 
           return (
-            <Col md={12} sm={24} key={movie.id}>
-              <div className="card">
-                <div className="cardImg">
-                  {!imgLoaded && !imgError && spinner}
-                  {imgError && <img src={fallbackImg} alt="Fallback" className="imgStyle" />}
-                  <img
-                    src={`http://image.tmdb.org/t/p/w342${movie.poster_path}`}
-                    onLoad={() => setImgStates((prev) => ({ ...prev, [movie.id]: { loaded: true, error: false } }))}
-                    onError={() => setImgStates((prev) => ({ ...prev, [movie.id]: { loaded: false, error: true } }))}
-                    alt={movie.title}
-                    className="imgStyle"
-                    style={{ display: imgLoaded ? 'block' : 'none' }}
-                  />
-                </div>
-                <div className="cardInfo">
-                  <h5>{truncateString(movie.title, 25)}</h5>
-                  <div className="movieDate">{formattedReleaseDate}</div>
-                  <div className="tags">
-                    <Tag>Action</Tag>
-                    <Tag>Drama</Tag>
-                  </div>
-                </div>
-                <div className="movieRating">
-                  <span>{Math.round(movie.popularity * 10) / 10}</span>
-                </div>
-                <div className="movieDescription">
-                  <p>{truncateString(movie.overview)}</p>
-                </div>
-                <div className="ratingStars">
-                  <Rate allowHalf style={{ fontSize: '16px' }} count={10} />
+            <div className="card" key={movie.id}>
+              <div className="cardImg">
+                {!imgLoaded && !imgError && spinner}
+                {imgError && <img src={fallbackImg} alt="Fallback" className="imgStyle" />}
+                <img
+                  src={`http://image.tmdb.org/t/p/w342${movie.poster_path}`}
+                  onLoad={() => setImgStates((prev) => ({ ...prev, [movie.id]: { loaded: true, error: false } }))}
+                  onError={() => setImgStates((prev) => ({ ...prev, [movie.id]: { loaded: false, error: true } }))}
+                  alt={movie.title}
+                  className="imgStyle"
+                  style={{ display: imgLoaded ? 'block' : 'none' }}
+                />
+              </div>
+              <div className="cardInfo">
+                <h5>{truncateString(movie.title, 18)}</h5>
+                <div className="movieDate">{formattedReleaseDate}</div>
+                <div className="tags">
+                  <Tag>Action</Tag>
+                  <Tag>Drama</Tag>
                 </div>
               </div>
-            </Col>
+              <div className="movieRating">
+                <span>{Math.round(movie.popularity * 10) / 10}</span>
+              </div>
+              <div className="movieDescription">
+                <p>{truncateString(movie.overview)}</p>
+              </div>
+              <div className="ratingStars">
+                <Rate allowHalf style={{ fontSize: '16px' }} count={10} />
+              </div>
+            </div>
           );
         })}
     </>

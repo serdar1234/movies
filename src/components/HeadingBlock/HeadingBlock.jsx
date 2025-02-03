@@ -1,14 +1,10 @@
 /* eslint-disable no-console */
 import { Layout, Input, Tabs } from 'antd';
 import { debounce } from 'lodash';
+import './HeadingBlock.css';
 
 const { Search } = Input;
 const { Header } = Layout;
-const headerStyle = {
-  textAlign: 'center',
-  backgroundColor: 'white',
-  height: '100px',
-};
 const items = [
   {
     key: '1',
@@ -21,8 +17,9 @@ const items = [
     children: '',
   },
 ];
+
 const tabStyle = {
-  maxWidth: '110px',
+  maxWidth: '120px',
   alignSelf: 'center',
   marginTop: '10px',
 };
@@ -33,9 +30,9 @@ function HeadingBlock({ onQueryChange }) {
   }, 500);
 
   return (
-    <Header style={headerStyle}>
+    <Header className="headerStyle">
       <Tabs defaultActiveKey="1" centered tabBarStyle={tabStyle} items={items} onChange={() => console.log('tabs')} />
-      <Search placeholder="Type to search" onChange={onChangeFn} onSearch={() => console.log('search')} enterButton />
+      <Search placeholder="Type to search" allowClear onChange={onChangeFn} enterButton />
     </Header>
   );
 }

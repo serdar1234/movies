@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col, Layout } from 'antd';
 
 import HeadingBlock from './components/HeadingBlock';
@@ -12,6 +12,14 @@ const { Content } = Layout;
 function App() {
   const [query, setQuery] = useState('');
   const [paginationInfo, setPaginationInfo] = useState({ page: 1, totalPages: 0 });
+
+  useEffect(() => {
+    setPaginationInfo((prevInfo) => ({
+      ...prevInfo,
+      page: 1,
+    }));
+    // console.log('app js pagination info', paginationInfo.page, paginationInfo.totalPages);
+  }, [query]);
 
   return (
     <Row justify="space-around">
@@ -26,11 +34,11 @@ function App() {
         <HeadingBlock onQueryChange={(q) => setQuery(q)} />
         <OnlineStatus />
         <Content>
-          <Row justify="space-between" align="middle">
+          <Row justify="space-evenly" gutter={[16, 16]}>
             <MovieCard query={query} pages={paginationInfo} setPages={(p) => setPaginationInfo(p)} />
           </Row>
         </Content>
-        <PaginationBlock totalPages={paginationInfo.totalPages} onPageChange={(p) => setPaginationInfo(p)} />
+        <PaginationBlock paginationInfo={paginationInfo} onPageChange={(p) => setPaginationInfo(p)} />
       </Col>
     </Row>
   );

@@ -6,7 +6,8 @@
   grid-auto-flow: column dense;
   font-family: 'Inter';
   color: black;
-  margin: 16px;
+  width: 451px;
+  height: 279px;
   padding: 0;
   line-height: normal;
   box-shadow: 0 4px 12px 0 #ccc;
@@ -106,29 +107,24 @@
   padding-block: 16px;
 }
 
-@media (max-width: 900px) {
-  .cardImg {
-    grid-row: 1 / 5;
-  }
-  .ratingStars {
-    grid-column: 1 / 4;
-  }
-}
-
 @media (max-width: 575px) {
   .card {
     grid-template-columns: 70px 1fr 54px;
-    grid-template-rows: 20% 10% 10% 50% 10%;
+    grid-template-rows: 20% 10% 10% 45% 15%;
     overflow: hidden;
     grid-auto-flow: column dense;
+    width: 388px;
+    height: 245px;
   }
 
   .imgStyle {
-    width: 60px;
-    height: 91px;
+    object-fit: cover;
+    min-width: 100%;
   }
 
   .cardImg {
+    width: 60px;
+    height: 91px;
     grid-row: 1 / 4;
     margin: 10px;
   }
@@ -150,9 +146,15 @@
     grid-column: 1 / 4;
     grid-row: 4 / 5;
     margin-inline: 10px;
+    margin-top: 10px;
+  }
+
+  .movieDescription p {
+    margin: 0;
   }
 
   .ratingStars {
     text-align: right;
+    margin-right: 16px;
   }
 }
