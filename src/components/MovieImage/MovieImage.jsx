@@ -6,9 +6,9 @@ import fallbackImg from '/asd.jpg';
 
 import './MovieImage.css';
 
-function MovieImage({ title, poster_path: path }) {
+function MovieImage({ info }) {
   const [imgState, setImgState] = useState('loading');
-
+  const { title, poster_path: path } = info;
   const spinner = <Spin indicator={<LoadingOutlined spin />} size="large" />;
 
   return (
