@@ -1,0 +1,28 @@
+.imgStyle {
+  width: 100%;
+  height: auto;
+  align-self: flex-start;
+}
+
+.cardImg {
+  grid-column: 1 / 2;
+  grid-row: 1 / 6;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+@media (max-width: 575px) {
+  .imgStyle {
+    object-fit: cover;
+    min-width: 100%;
+  }
+
+  .cardImg {
+    width: 60px;
+    height: 91px;
+    grid-row: 1 / 4;
+    margin: 10px;
+  }
+}

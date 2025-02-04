@@ -3,10 +3,9 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { Tag, Spin, Alert, Rate, Result } from 'antd';
 import { format } from 'date-fns';
 
-import fallbackImg from '/asd.jpg';
-
 import MovieFetcher from '../../services/MovieFetcher.js';
 import truncateString from '../../services/truncateString.js';
+import MovieImage from '../MovieImage/MovieImage.jsx';
 import './MovieCard.css';
 
 function MovieCard({ query, pages, setPages }) {
@@ -14,9 +13,9 @@ function MovieCard({ query, pages, setPages }) {
   const [loading, setLoading] = useState(true);
   const [noResults, setNoResults] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [imgStates, setImgStates] = useState({});
 
   const spinner = <Spin indicator={<LoadingOutlined spin />} size="large" />;
+
   useEffect(() => {
     const updateTitle = async () => {
       try {
@@ -35,13 +34,11 @@ function MovieCard({ query, pages, setPages }) {
           setNoResults(false);
           setMovies({});
         }
-      } catch (e) {
-        setErrorMessage(e.message);
-        return <Alert message={`Error fetching movies: ${e.message}`} type="error" closable />;
+      } catch (err) {
+        setErrorMessage(err.message);
       } finally {
         setLoading(false);
       }
-      return 0;
     };
 
     updateTitle();
@@ -77,27 +74,14 @@ function MovieCard({ query, pages, setPages }) {
       {movies.results &&
         movies.results.slice(0, 4).map((movie) => {
           let formattedReleaseDate = 'Unknown Release Date';
+
           if (movie.release_date) {
             formattedReleaseDate = format(movie.release_date, 'MMMM dd, yyyy');
           }
 
-          const imgLoaded = imgStates[movie.id] && imgStates[movie.id].loaded ? imgStates[movie.id].loaded : false;
-          const imgError = imgStates[movie.id] && imgStates[movie.id].error ? imgStates[movie.id].error : false;
-
           return (
             <div className="card" key={movie.id}>
-              <div className="cardImg">
-                {!imgLoaded && !imgError && spinner}
-                {imgError && <img src={fallbackImg} alt="Fallback" className="imgStyle" />}
-                <img
-                  src={`http://image.tmdb.org/t/p/w342${movie.poster_path}`}
-                  onLoad={() => setImgStates((prev) => ({ ...prev, [movie.id]: { loaded: true, error: false } }))}
-                  onError={() => setImgStates((prev) => ({ ...prev, [movie.id]: { loaded: false, error: true } }))}
-                  alt={movie.title}
-                  className="imgStyle"
-                  style={{ display: imgLoaded ? 'block' : 'none' }}
-                />
-              </div>
+              <MovieImage info={movie} />
               <div className="cardInfo">
                 <h5>{truncateString(movie.title, 25)}</h5>
                 <div className="movieDate">{formattedReleaseDate}</div>
