@@ -12,13 +12,16 @@ const { Content } = Layout;
 function App() {
   const [query, setQuery] = useState('');
   const [paginationInfo, setPaginationInfo] = useState({ page: 1, totalPages: 0 });
+  // console.log('app js pagination info', paginationInfo.page, paginationInfo.totalPages);
+  // console.log('query', query);
 
   useEffect(() => {
-    setPaginationInfo((prevInfo) => ({
-      ...prevInfo,
-      page: 1,
-    }));
-    // console.log('app js pagination info', paginationInfo.page, paginationInfo.totalPages);
+    setPaginationInfo((prevInfo) => {
+      if (query === '') {
+        return { page: 1, totalPages: 0 };
+      }
+      return { ...prevInfo, page: 1 };
+    });
   }, [query]);
 
   return (

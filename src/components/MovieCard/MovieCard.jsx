@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
-import { Tag, Spin, Alert, Rate } from 'antd';
+import { Tag, Spin, Alert, Rate, Result } from 'antd';
 import { format } from 'date-fns';
 
 import fallbackImg from '/asd.jpg';
@@ -12,6 +12,7 @@ import './MovieCard.css';
 function MovieCard({ query, pages, setPages }) {
   const [movies, setMovies] = useState({});
   const [loading, setLoading] = useState(true);
+  const [noResults, setNoResults] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [imgStates, setImgStates] = useState({});
 
@@ -19,12 +20,20 @@ function MovieCard({ query, pages, setPages }) {
   useEffect(() => {
     const updateTitle = async () => {
       try {
-        const data = await MovieFetcher.getMovies(query, pages.page);
-        if (typeof data === 'object') {
-          setMovies(data);
-          setPages({ page: data.page, totalPages: data.total_results });
+        if (query) {
+          const data = await MovieFetcher.getMovies(query, pages.page);
+          if (typeof data === 'object' && data.results.length) {
+            setMovies(data);
+            setPages({ page: data.page, totalPages: data.total_results });
+            setNoResults(false);
+            setErrorMessage(null);
+          } else if (data.total_results === 0) {
+            setNoResults(true);
+            setPages({ page: 1, totalPages: 0 });
+          }
         } else {
-          return <Alert message="Fetched data is not an object" type="error" closable />;
+          setNoResults(false);
+          setMovies({});
         }
       } catch (e) {
         setErrorMessage(e.message);
@@ -39,14 +48,32 @@ function MovieCard({ query, pages, setPages }) {
     /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, [query, pages.page]);
 
+  // // Testing
+  // console.log(
+  //   `movies ${Object.keys(movies)} loading ${loading} noResults ${noResults} errorMessage ${errorMessage} imgStates ${Object.keys(imgStates)} `
+  // );
+
+  if (errorMessage) {
+    return (
+      <div className="error">
+        <Alert message={`Error: ${errorMessage}`} type="error" closable />
+      </div>
+    );
+  }
+  if (noResults) {
+    return (
+      <div className="error">
+        <Result
+          status="404"
+          title="404"
+          subTitle={`Sorry, we couldn't find any movies for your search term: ${query}. Please try a different keyword or check your spelling!`}
+        />
+      </div>
+    );
+  }
   return (
     <>
       {loading && <div className="error">{spinner}</div>}
-      {errorMessage && (
-        <div className="error">
-          <Alert message={`Error: ${errorMessage}`} type="error" closable />
-        </div>
-      )}
       {movies.results &&
         movies.results.slice(0, 4).map((movie) => {
           let formattedReleaseDate = 'Unknown Release Date';
@@ -72,7 +99,7 @@ function MovieCard({ query, pages, setPages }) {
                 />
               </div>
               <div className="cardInfo">
-                <h5>{truncateString(movie.title, 18)}</h5>
+                <h5>{truncateString(movie.title, 25)}</h5>
                 <div className="movieDate">{formattedReleaseDate}</div>
                 <div className="tags">
                   <Tag>Action</Tag>

@@ -1,9 +1,9 @@
 import { Layout, Pagination } from 'antd';
 
 const { Footer } = Layout;
-
 function PaginationBlock({ onPageChange, paginationInfo }) {
   const { page, totalPages } = paginationInfo;
+  // console.log(page, totalPages);
 
   const changePage = (p) => {
     onPageChange((prev) => ({ ...prev, page: p }));

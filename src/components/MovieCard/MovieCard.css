@@ -1,7 +1,7 @@
 .card {
   display: grid;
   grid-template-columns: 40% 1fr 54px;
-  grid-template-rows: 15% 9% 9% 52% 15%;
+  grid-template-rows: 15% 10% 12% 48% 15%;
   overflow: hidden;
   grid-auto-flow: column dense;
   font-family: 'Inter';
@@ -39,10 +39,10 @@
 }
 
 .card h5 {
-  margin-block: 10px;
+  margin-block: 6px;
   font-size: 20px;
   font-weight: 400;
-  line-height: 28px;
+  line-height: 22px;
   text-align: left;
 }
 
@@ -79,7 +79,7 @@
   font-weight: 400;
   line-height: 14.52px;
   text-align: left;
-  margin-block: 10px;
+  margin-block: 6px;
 }
 
 .movieDescription {
