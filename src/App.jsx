@@ -1,12 +1,9 @@
 /* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Layout, Result } from 'antd';
+import { Row, Col, Result } from 'antd';
 
-import MainBlock from './components/MainBlock';
-import MovieCard from './components/MovieCard';
 import PaginationBlock from './components/PaginationBlock';
-
-const { Content } = Layout;
+import TabsBlock from './components/TabsBlock';
 
 function App() {
   const [query, setQuery] = useState('');
@@ -41,17 +38,19 @@ function App() {
           backgroundColor: 'white',
         }}
       >
-        <MainBlock onQueryChange={(q) => setQuery(q)} />
-        <Content>
-          <Row justify="space-evenly" gutter={[16, 16]}>
-            {isOnline ? (
-              <MovieCard query={query} pages={paginationInfo} setPages={(p) => setPaginationInfo(p)} />
-            ) : (
-              <Result status="Offline" title="Offline" subTitle="No Internet connection detected" />
-            )}
-          </Row>
-        </Content>
-        <PaginationBlock paginationInfo={paginationInfo} onPageChange={(p) => setPaginationInfo(p)} />
+        {isOnline ? (
+          <>
+            <TabsBlock
+              onQueryChange={(q) => setQuery(q)}
+              query={query}
+              pages={paginationInfo}
+              setPages={(p) => setPaginationInfo(p)}
+            />
+            <PaginationBlock paginationInfo={paginationInfo} onPageChange={(p) => setPaginationInfo(p)} />
+          </>
+        ) : (
+          <Result status="Offline" title="Offline" subTitle="No Internet connection detected" />
+        )}
       </Col>
     </Row>
   );
