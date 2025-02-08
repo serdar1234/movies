@@ -14,7 +14,7 @@ const items = [
   {
     key: '2',
     label: 'Rated',
-    children: '',
+    children: <h1>well hello there!</h1>,
   },
 ];
 
