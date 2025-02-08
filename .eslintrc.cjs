@@ -46,7 +46,7 @@ module.exports = {
       },
     ],
   },
-  ignorePatterns: ['dist/', 'build/', 'coverage/', '.vscode/', 'vite.config.js'],
+  ignorePatterns: ['dist/', 'build/', 'coverage/', '.vscode/', 'vite.config.js', 'node_modules'],
   settings: {
     'import/resolver': {
       node: {

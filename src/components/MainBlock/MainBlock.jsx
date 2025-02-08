@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { Layout, Input, Tabs } from 'antd';
 import { debounce } from 'lodash';
-import './HeadingBlock.css';
+import './MainBlock.css';
 
 const { Search } = Input;
 const { Header } = Layout;
@@ -24,7 +24,7 @@ const tabStyle = {
   marginTop: '10px',
 };
 
-function HeadingBlock({ onQueryChange }) {
+function MainBlock({ onQueryChange }) {
   const onChangeFn = debounce((evt) => {
     onQueryChange(evt.target.value);
   }, 500);
@@ -37,4 +37,4 @@ function HeadingBlock({ onQueryChange }) {
   );
 }
 
-export default HeadingBlock;
+export default MainBlock;

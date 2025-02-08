@@ -53,7 +53,7 @@ function MovieCard({ query, pages, setPages }) {
   if (errorMessage) {
     return (
       <div className="error">
-        <Alert message={`Error: ${errorMessage}`} type="error" closable />
+        <Alert message={`Error 666: ${errorMessage}`} type="error" closable />
       </div>
     );
   }

@@ -15,9 +15,12 @@ function OnlineStatus() {
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
     };
-  }, [isOnline]);
+  }, []);
 
-  return <div>{!isOnline && <Alert message="You are offline!" type="error" />}</div>;
+  if (!isOnline) {
+    return <Alert message="You are offline!" type="error" />;
+  }
+  return null;
 }
 
 export default OnlineStatus;
