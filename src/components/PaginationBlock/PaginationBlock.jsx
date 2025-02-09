@@ -1,16 +1,16 @@
 import { Layout, Pagination } from 'antd';
+import './PaginationBlock.css';
 
 const { Footer } = Layout;
-function PaginationBlock({ onPageChange, paginationInfo }) {
-  const { page, totalPages } = paginationInfo;
-  // console.log(page, totalPages);
+function PaginationBlock({ setPages, pages }) {
+  const { page, totalPages } = pages;
 
   const changePage = (p) => {
-    onPageChange((prev) => ({ ...prev, page: p }));
+    setPages({ page: p });
   };
 
   return (
-    <Footer style={{ backgroundColor: 'white' }}>
+    <Footer className="footer" style={{ backgroundColor: 'white' }}>
       <Pagination
         align="center"
         pageSize={20}

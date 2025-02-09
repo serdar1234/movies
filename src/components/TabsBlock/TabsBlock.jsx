@@ -10,12 +10,12 @@ const tabStyle = {
   marginTop: '10px',
 };
 
-function TabsBlock({ onQueryChange, query, pages, setPages }) {
+function TabsBlock() {
   const items = [
     {
       key: '1',
       label: 'Search',
-      children: <SearchTab onQueryChange={onQueryChange} query={query} pages={pages} setPages={setPages} />,
+      children: <SearchTab />,
     },
     {
       key: '2',

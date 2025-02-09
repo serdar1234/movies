@@ -1,0 +1,11 @@
+.search {
+  margin-bottom: 36px;
+  padding-inline: 36px;
+}
+
+@media screen and (max-width: 575px) {
+  .search {
+    margin-bottom: 10px;
+    padding-inline: 16px;
+  }
+}
