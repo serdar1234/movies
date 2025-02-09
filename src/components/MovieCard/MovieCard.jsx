@@ -3,7 +3,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { Tag, Spin, Alert, Rate, Result } from 'antd';
 import { format } from 'date-fns';
 
-import MovieFetcher from '../../services/MovieFetcher.js';
+import dataFetcher from '../../services/dataFetcher.js';
 import truncateString from '../../services/truncateString.js';
 import MovieImage from '../MovieImage/MovieImage.jsx';
 import './MovieCard.css';
@@ -20,7 +20,7 @@ function MovieCard({ query, pages, setPages }) {
     const updateTitle = async () => {
       try {
         if (query) {
-          const data = await MovieFetcher.getMovies(query, pages.page);
+          const data = await dataFetcher.getMovies(query, pages.page);
           if (typeof data === 'object' && data.results.length) {
             setMovies(data);
             setPages({ page: data.page, totalPages: data.total_results });

@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { Row, Col, Result } from 'antd';
 
 import TabsBlock from './components/TabsBlock';
+import setGuestSession from './services/setGuestSession';
+// import dataFetcher from './services/dataFetcher';
 
 function App() {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
@@ -10,6 +12,8 @@ function App() {
   function checkOnlineStatus() {
     setIsOnline(navigator.onLine);
   }
+
+  setGuestSession();
 
   useEffect(() => {
     window.addEventListener('offline', checkOnlineStatus);
