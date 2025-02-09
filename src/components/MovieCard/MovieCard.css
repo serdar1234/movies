@@ -37,11 +37,27 @@
   width: 30px;
   height: 30px;
   margin: 10px;
-  border: 2px solid #e9d100;
+  border: 2px solid #66e900;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.movieRating.rating5,
+.movieRating.rating6 {
+  border-color: #e9d100;
+}
+
+.movieRating.rating3,
+.movieRating.rating4 {
+  border-color: #e97e00;
+}
+
+.movieRating.rating0,
+.movieRating.rating1,
+.movieRating.rating2 {
+  border-color: #e90000;
 }
 
 .movieRating > span {

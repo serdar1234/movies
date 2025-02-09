@@ -74,6 +74,7 @@ function MovieCard({ query, pages, setPages }) {
       {movies.results &&
         movies.results.slice(0, 4).map((movie) => {
           let formattedReleaseDate = 'Unknown Release Date';
+          const rating = Math.round(movie.vote_average * 10) / 10;
 
           if (movie.release_date) {
             formattedReleaseDate = format(movie.release_date, 'MMMM dd, yyyy');
@@ -90,8 +91,8 @@ function MovieCard({ query, pages, setPages }) {
                   <Tag>Drama</Tag>
                 </div>
               </div>
-              <div className="movieRating">
-                <span>{Math.round(movie.popularity * 10) / 10}</span>
+              <div className={`movieRating rating${parseInt(rating, 10)}`}>
+                <span>{rating}</span>
               </div>
               <div className="movieDescription">
                 <p>{truncateString(movie.overview)}</p>
