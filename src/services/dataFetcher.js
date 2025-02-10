@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-export default class dataFetcher {
+export default class DataFetcher {
   constructor() {
     this.fetchOptions = {
       method: 'GET',
