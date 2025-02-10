@@ -6,12 +6,9 @@ function setGuestSession() {
     try {
       // const genres = await DataFetcher.getGenres();
       const data = await DataFetcher.getSession();
+      console.log(data);
+
       // console.table(genres);
-      // const data = {
-      //   success: true,
-      //   guest_session_id: '4b1459f862ce55ff1e8ca9f73c17df2c',
-      //   expires_at: '2025-02-11 09:00:52 UTC',
-      // };
 
       if (data.success) {
         // eslint-disable-next-line camelcase

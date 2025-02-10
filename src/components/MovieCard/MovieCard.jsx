@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
-import { Tag, Spin, Alert, Rate, Result } from 'antd';
+import { Spin, Alert, Rate, Result } from 'antd';
 import { format } from 'date-fns';
 
 import dataFetcher from '../../services/dataFetcher.js';
 import truncateString from '../../services/truncateString.js';
 import MovieImage from '../MovieImage/MovieImage.jsx';
+import MovieTags from '../MovieTags/MovieTags.jsx';
 import './MovieCard.css';
 
 function MovieCard({ query, pages, setPages }) {
@@ -86,10 +87,7 @@ function MovieCard({ query, pages, setPages }) {
               <div className="cardInfo">
                 <h5>{truncateString(movie.title, 25)}</h5>
                 <div className="movieDate">{formattedReleaseDate}</div>
-                <div className="tags">
-                  <Tag>Action</Tag>
-                  <Tag>Drama</Tag>
-                </div>
+                <MovieTags genreIDsArray={movie.genre_ids} />
               </div>
               <div className={`movieRating rating${parseInt(rating, 10)}`}>
                 <span>{rating}</span>

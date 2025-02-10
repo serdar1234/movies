@@ -4,7 +4,6 @@ import { Row, Col, Result } from 'antd';
 
 import TabsBlock from './components/TabsBlock';
 import setGuestSession from './services/setGuestSession';
-// import dataFetcher from './services/dataFetcher';
 
 function App() {
   const [isOnline, setIsOnline] = useState(navigator.onLine);

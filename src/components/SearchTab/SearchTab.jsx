@@ -5,6 +5,7 @@ import { Input, Row, Layout } from 'antd';
 import './SearchTab.css';
 import MovieCard from '../MovieCard';
 import PaginationBlock from '../PaginationBlock';
+import { GenresProvider } from '../../services/GenresContext';
 
 const { Search } = Input;
 const { Content } = Layout;
@@ -30,7 +31,9 @@ function SearchTab() {
       <Search className="search" placeholder="Type to search" allowClear onChange={onChangeFn} enterButton />
       <Content>
         <Row justify="space-evenly" gutter={[16, 16]}>
-          <MovieCard query={query} pages={paginationInfo} setPages={(p) => setPaginationInfo(p)} />
+          <GenresProvider>
+            <MovieCard query={query} pages={paginationInfo} setPages={(p) => setPaginationInfo(p)} />
+          </GenresProvider>
         </Row>
       </Content>
       {query && <PaginationBlock pages={paginationInfo} setPages={(p) => setPaginationInfo(p)} />}
