@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { Tabs } from 'antd';
 
 import './TabsBlock.css';
@@ -12,6 +11,7 @@ const tabStyle = {
 };
 
 function TabsBlock() {
+  let flag = 111;
   const items = [
     {
       key: '1',
@@ -21,11 +21,16 @@ function TabsBlock() {
     {
       key: '2',
       label: 'Rated',
-      children: <RatedTab />,
+      children: <RatedTab key={flag.toString} />,
     },
   ];
+  const onTabChange = (tab) => {
+    if (tab === '2') {
+      flag *= -1;
+    }
+  };
 
-  return <Tabs defaultActiveKey="1" tabBarStyle={tabStyle} items={items} onChange={() => console.log('tabs')} />;
+  return <Tabs defaultActiveKey="1" centered tabBarStyle={tabStyle} items={items} onChange={onTabChange} />;
 }
 
 export default TabsBlock;

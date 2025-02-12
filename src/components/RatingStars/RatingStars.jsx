@@ -4,7 +4,7 @@ import { useState } from 'react';
 import './RatingStars.css';
 import postRating from '../../services/postRating';
 
-function RatingStars({ movieID }) {
+function RatingStars({ movieID, disabled }) {
   const [value, setValue] = useState(0);
 
   const storedRatings = JSON.parse(localStorage.getItem('myRatings'));
@@ -21,6 +21,7 @@ function RatingStars({ movieID }) {
       <Rate
         allowHalf
         value={value}
+        disabled={disabled}
         onChange={(stars) => rateMovie(stars, movieID)}
         style={{ fontSize: '16px' }}
         count={10}

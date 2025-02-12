@@ -1,26 +1,52 @@
-import { useState } from 'react';
-import { Row, Layout } from 'antd';
+import { useState, useEffect } from 'react';
+import { Row, Layout, Alert } from 'antd';
 
 import './RatedTab.css';
-import MovieCard from '../MovieCard';
 import PaginationBlock from '../PaginationBlock';
 import { GenresProvider } from '../../services/GenresContext';
+import DataFetcher from '../../services/DataFetcher';
+import MovieCard from '../MovieCard';
 
 const { Content } = Layout;
 
 function RatedTab() {
-  const [paginationInfo, setPaginationInfo] = useState({ page: 1, totalPages: 0 });
+  const [currentPage, setCurrentPage] = useState(1);
+  const [total, setTotal] = useState(0);
+  const [movieList, setMovieList] = useState({ results: [], total_pages: 0 });
+  const [error, setError] = useState(null);
+
+  const fetchRatedMovies = async () => {
+    try {
+      const ratedMovies = await DataFetcher.getRatedMovies(currentPage);
+      setMovieList(ratedMovies);
+      setTotal(ratedMovies.total_results);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchRatedMovies();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage]);
 
   return (
     <>
       <Content>
         <Row justify="space-evenly" gutter={[16, 16]}>
           <GenresProvider>
-            <MovieCard query="123" pages={paginationInfo} setPages={(p) => setPaginationInfo(p)} />
+            {error && (
+              <div className="error">
+                <Alert message={`Error: ${error.message}`} type="error" closable />
+              </div>
+            )}
+            {movieList.results.slice(0, 4).map((movie) => (
+              <MovieCard key={movie.id} movie={movie} disabled />
+            ))}
           </GenresProvider>
         </Row>
       </Content>
-      <PaginationBlock pages={paginationInfo} setPages={(p) => setPaginationInfo(p)} />
+      <PaginationBlock currentPage={currentPage} total={total} setCurrentPage={setCurrentPage} />
     </>
   );
 }

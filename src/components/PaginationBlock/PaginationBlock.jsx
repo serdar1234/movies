@@ -2,7 +2,7 @@ import { Layout, Pagination } from 'antd';
 import './PaginationBlock.css';
 
 const { Footer } = Layout;
-function PaginationBlock({ currentPage, totalPages, setCurrentPage }) {
+function PaginationBlock({ currentPage, total, setCurrentPage }) {
   return (
     <Footer className="footer" style={{ backgroundColor: 'white' }}>
       <Pagination
@@ -11,7 +11,7 @@ function PaginationBlock({ currentPage, totalPages, setCurrentPage }) {
         current={currentPage}
         onChange={setCurrentPage}
         showSizeChanger={false}
-        total={totalPages}
+        total={total}
       />
     </Footer>
   );

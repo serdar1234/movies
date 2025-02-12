@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import options from './fetchOptions';
 
 export default class DataFetcher {
@@ -33,10 +31,10 @@ export default class DataFetcher {
     return res.json();
   }
 
-  static async getRatedMovies() {
+  static async getRatedMovies(pageNumber = 1) {
     const storedSession = localStorage.getItem('guest_session_id');
     const res = await fetch(
-      `https://api.themoviedb.org/3/guest_session/${storedSession}/rated/movies?language=en-US&page=1&sort_by=created_at.asc`,
+      `https://api.themoviedb.org/3/guest_session/${storedSession}/rated/movies?language=en-US&page=${pageNumber}&sort_by=created_at.asc`,
       options
     );
 

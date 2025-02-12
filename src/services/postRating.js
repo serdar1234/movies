@@ -8,14 +8,13 @@ const postRating = (value, movieID) => {
   localStorage.setItem('myRatings', myRatings);
 
   const sessionID = localStorage.getItem('guest_session_id');
-  console.log('Guest Session ID:', sessionID);
+
   const optionsWithValue = {
     ...fetchOptions,
     method: 'POST',
     body: JSON.stringify({ value }),
     headers: { ...fetchOptions.headers, 'Content-Type': 'application/json;charset=utf-8' },
   };
-  console.log(optionsWithValue);
 
   fetch(`https://api.themoviedb.org/3/movie/${movieID}/rating?guest_session_id=${sessionID}`, optionsWithValue)
     .then((res) => res.json())

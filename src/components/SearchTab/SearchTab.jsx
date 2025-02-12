@@ -13,7 +13,7 @@ const { Content } = Layout;
 function SearchTab() {
   const [query, setQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -29,17 +29,11 @@ function SearchTab() {
       <Content>
         <Row justify="space-evenly" gutter={[16, 16]}>
           <GenresProvider>
-            <MoviesList query={query} currentPage={currentPage} setTotalPages={setTotalPages} />
+            <MoviesList query={query} currentPage={currentPage} setTotal={setTotal} />
           </GenresProvider>
         </Row>
       </Content>
-      {query && (
-        <PaginationBlock
-          currentPage={currentPage}
-          totalPages={totalPages}
-          setCurrentPage={(page) => setCurrentPage(page)}
-        />
-      )}
+      {query && <PaginationBlock currentPage={currentPage} total={total} setCurrentPage={setCurrentPage} />}
     </>
   );
 }

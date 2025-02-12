@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin, Alert, Result } from 'antd';
 
-import dataFetcher from '../../services/DataFetcher.js';
+import DataFetcher from '../../services/DataFetcher.js';
 import MovieCard from '../MovieCard/MovieCard.jsx';
 import './MoviesList.css';
 
-function MoviesList({ query, currentPage, setTotalPages }) {
+function MoviesList({ query, currentPage, setTotal }) {
   const [movies, setMovies] = useState({});
   const [loading, setLoading] = useState(true);
   const [noResults, setNoResults] = useState(false);
@@ -14,20 +14,18 @@ function MoviesList({ query, currentPage, setTotalPages }) {
 
   const spinner = <Spin indicator={<LoadingOutlined spin />} size="large" />;
   useEffect(() => {
-    console.log('useEffect');
     const updateTitle = async () => {
       try {
         if (query) {
-          // get rated movies
-          const data = await dataFetcher.getMovies(query, currentPage);
+          const data = await DataFetcher.getMovies(query, currentPage);
           if (data.total_results > 0) {
             setMovies(data);
-            setTotalPages(data.total_pages);
+            setTotal(data.total_results);
             setNoResults(false);
             setErrorMessage(null);
           } else {
             setNoResults(true);
-            setTotalPages(0);
+            setTotal(0);
           }
         } else {
           setNoResults(false);
@@ -41,7 +39,7 @@ function MoviesList({ query, currentPage, setTotalPages }) {
     };
 
     updateTitle();
-  }, [query, currentPage, setTotalPages]);
+  }, [query, currentPage, setTotal]);
 
   if (errorMessage) {
     return (

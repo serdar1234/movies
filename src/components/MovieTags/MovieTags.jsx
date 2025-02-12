@@ -8,14 +8,14 @@ const findGenre = (array, genreID) => {
   return genre.name;
 };
 
-function MovieTags({ genreIDsArray }) {
+function MovieTags({ movieGenres }) {
   return (
     <div className="tags">
       <GenresContext.Consumer>
         {({ allGenres }) => {
           return (
             <>
-              {genreIDsArray.slice(0, 3).map((genreID) => {
+              {movieGenres.slice(0, 3).map((genreID) => {
                 return <Tag key={genreID}>{findGenre(allGenres, genreID)}</Tag>;
               })}
             </>

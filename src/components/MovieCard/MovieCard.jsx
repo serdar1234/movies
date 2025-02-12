@@ -6,7 +6,7 @@ import MovieTags from '../MovieTags/MovieTags.jsx';
 import RatingStars from '../RatingStars/RatingStars.jsx';
 import './MovieCard.css';
 
-function MovieCard({ movie }) {
+function MovieCard({ movie, disabled = false }) {
   let formattedReleaseDate = 'Unknown Release Date';
   const rating = Math.round(movie.vote_average * 10) / 10;
 
@@ -20,7 +20,7 @@ function MovieCard({ movie }) {
       <div className="cardInfo">
         <h5>{truncateString(movie.title, 25)}</h5>
         <div className="movieDate">{formattedReleaseDate}</div>
-        <MovieTags genreIDsArray={movie.genre_ids} />
+        <MovieTags movieGenres={movie.genre_ids} />
       </div>
       <div className={`movieRating rating${parseInt(rating, 10)}`}>
         <span>{rating}</span>
@@ -28,7 +28,7 @@ function MovieCard({ movie }) {
       <div className="movieDescription">
         <p>{truncateString(movie.overview)}</p>
       </div>
-      <RatingStars movieID={movie.id} />
+      <RatingStars movieID={movie.id} disabled={disabled} />
     </div>
   );
 }

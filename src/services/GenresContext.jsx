@@ -1,23 +1,36 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable no-console */
 import React, { createContext, useState, useEffect } from 'react';
+import { Alert } from 'antd';
 
-import options from './fetchOptions';
+import DataFetcher from './DataFetcher';
 
 const GenresContext = createContext();
 
 function GenresProvider({ children }) {
   const [allGenres, setAllGenres] = useState([]);
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  async function getGenres() {
+    const data = await DataFetcher.getGenres();
+    setAllGenres(data.genres);
+  }
 
   useEffect(() => {
-    fetch('https://api.themoviedb.org/3/genre/movie/list?language=en', options)
-      .then((res) => res.json())
-      .then((data) => {
-        setAllGenres(data.genres);
-      })
-      .catch((err) => console.error(err));
+    try {
+      getGenres();
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
   }, []);
+  if (errorMessage) {
+    return (
+      <div className="error">
+        <Alert message={`Could not fetch movie genres: ${errorMessage}`} type="error" closable />
+      </div>
+    );
+  }
 
+  // eslint-disable-next-line react/jsx-no-constructed-context-values
   return <GenresContext.Provider value={{ allGenres }}>{children}</GenresContext.Provider>;
 }
 

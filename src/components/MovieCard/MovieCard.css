@@ -97,6 +97,9 @@
 
 .error {
   padding-block: 16px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 @media (max-width: 575px) {
