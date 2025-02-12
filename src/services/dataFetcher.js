@@ -32,4 +32,17 @@ export default class DataFetcher {
     }
     return res.json();
   }
+
+  static async getRatedMovies() {
+    const storedSession = localStorage.getItem('guest_session_id');
+    const res = await fetch(
+      `https://api.themoviedb.org/3/guest_session/${storedSession}/rated/movies?language=en-US&page=1&sort_by=created_at.asc`,
+      options
+    );
+
+    if (!res.ok) {
+      throw new Error(`Could not get the list of movies rated in this session - received status ${res.status}`);
+    }
+    return res.json();
+  }
 }

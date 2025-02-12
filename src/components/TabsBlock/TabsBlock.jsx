@@ -2,7 +2,8 @@
 import { Tabs } from 'antd';
 
 import './TabsBlock.css';
-import SearchTab from '../SearchTab/SearchTab';
+import SearchTab from '../SearchTab';
+import RatedTab from '../RatedTab/RatedTab';
 
 const tabStyle = {
   maxWidth: '120px',
@@ -20,13 +21,11 @@ function TabsBlock() {
     {
       key: '2',
       label: 'Rated',
-      children: <h1>There will be rated movies here!</h1>,
+      children: <RatedTab />,
     },
   ];
 
-  return (
-    <Tabs defaultActiveKey="1" centered tabBarStyle={tabStyle} items={items} onChange={() => console.log('tabs')} />
-  );
+  return <Tabs defaultActiveKey="1" tabBarStyle={tabStyle} items={items} onChange={() => console.log('tabs')} />;
 }
 
 export default TabsBlock;

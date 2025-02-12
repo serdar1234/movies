@@ -2,54 +2,31 @@
 
 Row
   Col
-    MainBlock
-      Header
-        Tabs
-        Search
-    Content
-      Row
-        MovieCard || Result-Offline
-          Errors ||
-          spinner
-          Collection:
-            MovieCard
-      /Row
-    /Content
-
-    PaginationBlock
-      Footer
-        Pagination
-      /Footer
-    /PaginationBlock
-  /Col
-/Row
-
-
-
-
-
-
-Row
-  Col
-    MainBlock
-      Header
-        Tabs
-          SearchTab
-            Search
-            Content
-              Row
+    TabsBlock
+      Tabs
+      
+        SearchTab
+          Search /
+          Content
+            Row
+              GenresProvider
                 MovieCard || Result-Offline
                   Errors ||
                   spinner
                   Collection:MovieCard
-              /Row
-            /Content
-          RatedTab
-    PaginationBlock
-      Footer
-        Pagination
-      /Footer
-    /PaginationBlock
+            /Row
+          /Content
+          PaginationBlock
+            Footer
+              Pagination
+            /Footer
+          /PaginationBlock
+        /SearchTab
+
+        RatedTab 
+        /RatedTab
+      /Tabs
+    /TabsBlock
   /Col
 /Row
 
