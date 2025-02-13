@@ -32,7 +32,9 @@ export default class FetchData {
   }
 
   static async getRatedMovies(pageNumber = 1) {
+    if (!localStorage.getItem('myRatings')) return false;
     const storedSession = localStorage.getItem('guestSessionID');
+
     const res = await fetch(
       `https://api.themoviedb.org/3/guest_session/${storedSession}/rated/movies?language=en-US&page=${pageNumber}&sort_by=created_at.asc`,
       options

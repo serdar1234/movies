@@ -18,8 +18,10 @@ function RatedTab() {
   const fetchRatedMovies = async () => {
     try {
       const ratedMovies = await FetchData.getRatedMovies(currentPage);
-      setMovieList(ratedMovies);
-      setTotal(ratedMovies.total_results);
+      if (ratedMovies) {
+        setMovieList(ratedMovies);
+        setTotal(ratedMovies.total_results);
+      }
     } catch (err) {
       setError(err.message);
     }
