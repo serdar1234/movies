@@ -1,9 +1,8 @@
-/* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Result } from 'antd';
 
 import TabsBlock from './components/TabsBlock';
-import setGuestSession from './services/setGuestSession';
+import SetSession from './services/SetSession.jsx';
 
 function App() {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
@@ -12,7 +11,7 @@ function App() {
     setIsOnline(navigator.onLine);
   }
 
-  setGuestSession();
+  SetSession();
 
   useEffect(() => {
     window.addEventListener('offline', checkOnlineStatus);

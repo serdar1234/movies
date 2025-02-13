@@ -30,7 +30,7 @@ function TabsBlock() {
       children: <RatedTab key={flag} />,
     },
   ];
-  console.log('TabsBlock', flag);
+
   return <Tabs defaultActiveKey="1" centered tabBarStyle={tabStyle} items={items} onChange={onTabChange} />;
 }
 

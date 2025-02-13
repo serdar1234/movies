@@ -14,8 +14,9 @@ function RatingStars({ movieID, disabled }) {
   }
 
   const rateMovie = (stars, id) => {
-    setValue(stars);
-    postRating(stars, id);
+    const rating = stars || 0.5;
+    postRating(rating, id);
+    setValue(rating);
   };
 
   return (

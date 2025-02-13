@@ -63,7 +63,7 @@ function MovieList({ query, currentPage, setTotal }) {
     <>
       {loading && <div className="error">{spinner}</div>}
       {movies.results &&
-        movies.results.slice(0, 4).map((movie) => {
+        movies.results.map((movie) => {
           return <MovieCard key={movie.id} movie={movie} />;
         })}
     </>

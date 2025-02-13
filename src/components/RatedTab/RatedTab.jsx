@@ -40,7 +40,7 @@ function RatedTab() {
                 <Result status="404" title="404" subTitle={error} />
               </div>
             )}
-            {movieList.results.slice(0, 4).map((movie) => (
+            {movieList.results.map((movie) => (
               <MovieCard key={movie.id} movie={movie} disabled />
             ))}
           </GenresProvider>
