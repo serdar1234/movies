@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import DataFetcher from './DataFetcher.js';
+import DataFetcher from './DataFetcher';
 
 function setGuestSession() {
   const createNewGuestSession = async () => {
@@ -24,7 +24,7 @@ function setGuestSession() {
     }
   };
 
-  const checkGuestSession = () => {
+  const checkGuestSession = async () => {
     const storedSession = localStorage.getItem('guest_session_id');
     const storedExpiration = localStorage.getItem('guest_session_expires_at');
 
@@ -38,7 +38,7 @@ function setGuestSession() {
       }
     }
 
-    createNewGuestSession();
+    await createNewGuestSession();
   };
 
   checkGuestSession();
