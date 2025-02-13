@@ -2,7 +2,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { Alert } from 'antd';
 
-import DataFetcher from './DataFetcher';
+import DataFetcher from './DataFetcher.js';
 
 const GenresContext = createContext();
 

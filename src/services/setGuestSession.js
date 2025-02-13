@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import DataFetcher from './DataFetcher';
+import DataFetcher from './DataFetcher.js';
 
 function setGuestSession() {
   const createNewGuestSession = async () => {

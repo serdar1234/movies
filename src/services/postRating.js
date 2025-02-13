@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-import fetchOptions from './fetchOptions';
+import fetchOptions from './fetchOptions.js';
 
 const postRating = (value, movieID) => {
   const storedRatings = JSON.parse(localStorage.getItem('myRatings'));

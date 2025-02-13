@@ -1,4 +1,4 @@
-import options from './fetchOptions';
+import options from './fetchOptions.js';
 
 export default class DataFetcher {
   static async getMovies(query, page) {
