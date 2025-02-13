@@ -37,7 +37,7 @@ export default class DataFetcher {
       `https://api.themoviedb.org/3/guest_session/${storedSession}/rated/movies?language=en-US&page=${pageNumber}&sort_by=created_at.asc`,
       options
     );
-
+    console.log(res);
     if (!res.ok) {
       throw new Error(`Could not get the list of movies rated in this session - received status ${res.status}`);
     }

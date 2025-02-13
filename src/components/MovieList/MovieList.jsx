@@ -4,9 +4,9 @@ import { Spin, Alert, Result } from 'antd';
 
 import DataFetcher from '../../services/DataFetcher.js';
 import MovieCard from '../MovieCard/MovieCard.jsx';
-import './MoviesList.css';
+import './MovieList.css';
 
-function MoviesList({ query, currentPage, setTotal }) {
+function MovieList({ query, currentPage, setTotal }) {
   const [movies, setMovies] = useState({});
   const [loading, setLoading] = useState(true);
   const [noResults, setNoResults] = useState(false);
@@ -70,4 +70,4 @@ function MoviesList({ query, currentPage, setTotal }) {
   );
 }
 
-export default MoviesList;
+export default MovieList;

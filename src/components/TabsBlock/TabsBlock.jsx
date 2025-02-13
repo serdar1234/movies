@@ -1,4 +1,5 @@
 import { Tabs } from 'antd';
+import { useState } from 'react';
 
 import './TabsBlock.css';
 import SearchTab from '../SearchTab';
@@ -11,7 +12,12 @@ const tabStyle = {
 };
 
 function TabsBlock() {
-  let flag = 111;
+  const [flag, setFlag] = useState(111);
+  const onTabChange = (tab) => {
+    if (tab === '2') {
+      setFlag((prev) => prev + 1);
+    }
+  };
   const items = [
     {
       key: '1',
@@ -21,15 +27,10 @@ function TabsBlock() {
     {
       key: '2',
       label: 'Rated',
-      children: <RatedTab key={flag.toString} />,
+      children: <RatedTab key={flag} />,
     },
   ];
-  const onTabChange = (tab) => {
-    if (tab === '2') {
-      flag *= -1;
-    }
-  };
-
+  console.log('TabsBlock', flag);
   return <Tabs defaultActiveKey="1" centered tabBarStyle={tabStyle} items={items} onChange={onTabChange} />;
 }
 

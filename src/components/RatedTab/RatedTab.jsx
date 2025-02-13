@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Row, Layout, Alert } from 'antd';
+import { Row, Layout, Result } from 'antd';
 
 import './RatedTab.css';
 import PaginationBlock from '../PaginationBlock';
@@ -37,7 +37,7 @@ function RatedTab() {
           <GenresProvider>
             {error && (
               <div className="error">
-                <Alert message={`Error: ${error.message}`} type="error" closable />
+                <Result status="404" title="404" subTitle={error} />
               </div>
             )}
             {movieList.results.slice(0, 4).map((movie) => (

@@ -8,8 +8,10 @@ function RatingStars({ movieID, disabled }) {
   const [value, setValue] = useState(0);
 
   const storedRatings = JSON.parse(localStorage.getItem('myRatings'));
-  const myRatingOfThisMovie = storedRatings[movieID];
-  if (value !== myRatingOfThisMovie) setValue(myRatingOfThisMovie);
+  if (storedRatings) {
+    const myRatingOfThisMovie = storedRatings[movieID];
+    if (value !== myRatingOfThisMovie) setValue(myRatingOfThisMovie);
+  }
 
   const rateMovie = (stars, id) => {
     setValue(stars);
