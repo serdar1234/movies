@@ -12,7 +12,7 @@ const tabStyle = {
 };
 
 function TabsBlock() {
-  const [flag, setFlag] = useState(111);
+  const [flag, setFlag] = useState(100);
   const onTabChange = (tab) => {
     if (tab === '2') {
       setFlag((prev) => prev + 1);

@@ -37,7 +37,7 @@ function RatedTab() {
           <GenresProvider>
             {error && (
               <div className="error">
-                <Result status="404" title="404" subTitle={error} />
+                <Result status="Error" title="Error" subTitle={error} />
               </div>
             )}
             {movieList.results.map((movie) => (

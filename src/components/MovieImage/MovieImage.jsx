@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
 
-import fallbackImg from '/asd.jpg';
+import placeholderImg from '/placeholder.jpg';
 
 import './MovieImage.css';
 
@@ -14,7 +14,7 @@ function MovieImage({ info }) {
   return (
     <div className="cardImg">
       {imgState === 'loading' && spinner}
-      {imgState === 'fail' && <img src={fallbackImg} alt="Fallback" className="imgStyle" />}
+      {imgState === 'fail' && <img src={placeholderImg} alt="Fallback" className="imgStyle" />}
       <img
         src={`http://image.tmdb.org/t/p/w342${path}`}
         onLoad={() => setImgState('success')}

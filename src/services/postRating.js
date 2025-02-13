@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-
 import fetchOptions from './fetchOptions.js';
 
 const postRating = async (value, movieID) => {

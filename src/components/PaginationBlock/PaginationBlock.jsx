@@ -4,7 +4,7 @@ import './PaginationBlock.css';
 const { Footer } = Layout;
 function PaginationBlock({ currentPage, total, setCurrentPage }) {
   return (
-    <Footer className="footer" style={{ backgroundColor: 'white' }}>
+    <Footer className="footer">
       <Pagination
         align="center"
         pageSize={20}

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { createContext, useState, useEffect } from 'react';
 import { Alert } from 'antd';
 
