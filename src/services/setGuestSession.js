@@ -4,11 +4,8 @@ import DataFetcher from './DataFetcher';
 function setGuestSession() {
   const createNewGuestSession = async () => {
     try {
-      // const genres = await DataFetcher.getGenres();
       const data = await DataFetcher.getSession();
       console.log(data);
-
-      // console.table(genres);
 
       if (data.success) {
         // eslint-disable-next-line camelcase
@@ -16,6 +13,7 @@ function setGuestSession() {
 
         localStorage.setItem('guest_session_id', guest_session_id);
         localStorage.setItem('guest_session_expires_at', expires_at);
+        localStorage.removeItem('myRatings');
 
         console.log('New Guest Session created. Session ID:', guest_session_id);
       } else {
@@ -34,7 +32,6 @@ function setGuestSession() {
       const now = new Date();
       const expirationDate = new Date(storedExpiration);
 
-      // Check if the guest_session_id is not expired
       if (now < expirationDate) {
         console.log('Guest session is valid. Session ID:', storedSession);
         return;
