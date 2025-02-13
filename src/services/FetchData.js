@@ -1,6 +1,6 @@
 import options from './fetchOptions.js';
 
-export default class DataFetcher {
+export default class FetchData {
   static async getMovies(query, page) {
     const res = await fetch(
       `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(query)}&include_adult=false&language=en-US&page=${page}`,

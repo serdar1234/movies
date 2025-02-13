@@ -2,7 +2,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { Alert } from 'antd';
 
-import DataFetcher from './DataFetcher.js';
+import FetchData from './FetchData.js';
 
 const GenresContext = createContext();
 
@@ -11,7 +11,7 @@ function GenresProvider({ children }) {
   const [errorMessage, setErrorMessage] = useState(null);
 
   async function getGenres() {
-    const data = await DataFetcher.getGenres();
+    const data = await FetchData.getGenres();
     setAllGenres(data.genres);
   }
 

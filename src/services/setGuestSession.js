@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
-import DataFetcher from './DataFetcher';
+import FetchData from './FetchData';
 
 function setGuestSession() {
   const createNewGuestSession = async () => {
     try {
-      const data = await DataFetcher.getSession();
+      const data = await FetchData.getSession();
       console.log(data);
 
       if (data.success) {

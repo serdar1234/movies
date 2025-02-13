@@ -4,7 +4,7 @@ import { Row, Layout, Result } from 'antd';
 import './RatedTab.css';
 import PaginationBlock from '../PaginationBlock';
 import { GenresProvider } from '../../services/GenresContext';
-import DataFetcher from '../../services/DataFetcher';
+import FetchData from '../../services/FetchData';
 import MovieCard from '../MovieCard';
 
 const { Content } = Layout;
@@ -17,7 +17,7 @@ function RatedTab() {
 
   const fetchRatedMovies = async () => {
     try {
-      const ratedMovies = await DataFetcher.getRatedMovies(currentPage);
+      const ratedMovies = await FetchData.getRatedMovies(currentPage);
       setMovieList(ratedMovies);
       setTotal(ratedMovies.total_results);
     } catch (err) {

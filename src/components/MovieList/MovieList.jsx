@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin, Alert, Result } from 'antd';
 
-import DataFetcher from '../../services/DataFetcher.js';
+import FetchData from '../../services/FetchData.js';
 import MovieCard from '../MovieCard/MovieCard.jsx';
 import './MovieList.css';
 
@@ -17,7 +17,7 @@ function MovieList({ query, currentPage, setTotal }) {
     const updateTitle = async () => {
       try {
         if (query) {
-          const data = await DataFetcher.getMovies(query, currentPage);
+          const data = await FetchData.getMovies(query, currentPage);
           if (data.total_results > 0) {
             setMovies(data);
             setTotal(data.total_results);
