@@ -16,7 +16,7 @@ function MovieImage({ info }) {
       {imgState === 'loading' && spinner}
       {imgState === 'fail' && <img src={placeholderImg} alt="Fallback" className="imgStyle" />}
       <img
-        src={`http://image.tmdb.org/t/p/w342${path}`}
+        src={`https://image.tmdb.org/t/p/w342${path}`}
         onLoad={() => setImgState('success')}
         onError={() => setImgState('fail')}
         alt={title}
