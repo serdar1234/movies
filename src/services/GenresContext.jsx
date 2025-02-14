@@ -11,7 +11,9 @@ function GenresProvider({ children }) {
 
   async function getGenres() {
     const data = await FetchData.getGenres();
-    setAllGenres(data.genres);
+    const entriesArray = data.genres.map((genre) => [genre.id, genre.name]);
+    const genreMap = new Map(entriesArray);
+    setAllGenres(genreMap);
   }
 
   useEffect(() => {

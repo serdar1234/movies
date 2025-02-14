@@ -3,9 +3,8 @@ import { Tag } from 'antd';
 import { GenresContext } from '../../services/GenresContext';
 import './MovieTags.css';
 
-const findGenre = (array, genreID) => {
-  const genre = array.find((item) => item.id === genreID);
-  return genre.name;
+const findGenre = (genreMap, genreID) => {
+  return genreMap.get(genreID);
 };
 
 function MovieTags({ movieGenres }) {
