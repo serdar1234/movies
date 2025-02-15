@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useCallback } from 'react';
 import { Alert } from 'antd';
 
 import FetchData from './FetchData.js';
@@ -9,20 +9,20 @@ function GenresProvider({ children }) {
   const [allGenres, setAllGenres] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
 
-  async function getGenres() {
-    const data = await FetchData.getGenres();
-    const entriesArray = data.genres.map((genre) => [genre.id, genre.name]);
-    const genreMap = new Map(entriesArray);
-    setAllGenres(genreMap);
-  }
-
-  useEffect(() => {
+  const getGenres = useCallback(async () => {
     try {
-      getGenres();
+      const data = await FetchData.getGenres();
+      const entriesArray = data.genres.map((genre) => [genre.id, genre.name]);
+      setAllGenres(new Map(entriesArray));
     } catch (error) {
       setErrorMessage(error.message);
     }
   }, []);
+
+  useEffect(() => {
+    getGenres();
+  }, [getGenres]);
+
   if (errorMessage) {
     return (
       <div className="error">
