@@ -11,11 +11,11 @@ function MovieTags({ movieGenres }) {
   return (
     <div className="tags">
       <GenresContext.Consumer>
-        {({ allGenres }) => {
+        {({ memoizedGenres }) => {
           return (
             <>
               {movieGenres.slice(0, 3).map((genreID) => {
-                return <Tag key={genreID}>{findGenre(allGenres, genreID)}</Tag>;
+                return <Tag key={genreID}>{findGenre(memoizedGenres, genreID)}</Tag>;
               })}
             </>
           );

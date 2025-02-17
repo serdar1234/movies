@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useState, useEffect, useCallback, useMemo } from 'react';
 import { Alert } from 'antd';
 
 import FetchData from './FetchData.js';
@@ -8,6 +8,7 @@ const GenresContext = createContext();
 function GenresProvider({ children }) {
   const [allGenres, setAllGenres] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
+  const memoizedGenres = useMemo(() => allGenres, [allGenres]);
 
   const getGenres = useCallback(async () => {
     try {
@@ -32,7 +33,7 @@ function GenresProvider({ children }) {
   }
 
   // eslint-disable-next-line react/jsx-no-constructed-context-values
-  return <GenresContext.Provider value={{ allGenres }}>{children}</GenresContext.Provider>;
+  return <GenresContext.Provider value={{ memoizedGenres }}>{children}</GenresContext.Provider>;
 }
 
 export { GenresProvider, GenresContext };
