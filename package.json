@@ -12,7 +12,7 @@
     "lint-staged": "lint-staged",
     "prepare": "husky",
     "preview": "vite preview",
-    "test": "jest"
+    "test": "jest --watch"
   },
   "lint-staged": {
     "src/**/*.{js,jsx}": [
@@ -24,6 +24,7 @@
     "@ant-design/icons": "^6.0.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
     "antd": "^5.23.3",
     "date-fns": "^4.1.0",
     "identity-obj-proxy": "^3.0.0",

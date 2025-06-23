@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "checkJs": true,
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "types": ["@testing-library/jest-dom"]
+  },
+  "include": ["src/**/*.js", "jest-dom.d.ts"]
+}

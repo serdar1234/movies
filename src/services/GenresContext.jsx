@@ -3,10 +3,10 @@ import { Alert } from 'antd';
 
 import FetchData from './FetchData.js';
 
-const GenresContext = createContext();
+const GenresContext = createContext(null);
 
 function GenresProvider({ children }) {
-  const [allGenres, setAllGenres] = useState([]);
+  const [allGenres, setAllGenres] = useState(new Map());
   const [errorMessage, setErrorMessage] = useState(null);
   const memoizedGenres = useMemo(() => allGenres, [allGenres]);
 
