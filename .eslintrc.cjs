@@ -3,6 +3,7 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    jest: true,
   },
   parserOptions: {
     parser: '@babel/eslint-parser',
@@ -24,6 +25,12 @@ module.exports = {
     'linebreak-style': [0, 'unix'],
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: ['**/__tests__/**', '**/tests/**', '**/*.test.js', '**/*.spec.js'],
+      },
+    ],
     'import/no-unresolved': [
       'error',
       {

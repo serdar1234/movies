@@ -11,7 +11,8 @@
     "lint:fix": "eslint \"src/**/*.{js,jsx,json}\" --fix",
     "lint-staged": "lint-staged",
     "prepare": "husky",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "jest"
   },
   "lint-staged": {
     "src/**/*.{js,jsx}": [
@@ -20,12 +21,15 @@
     ]
   },
   "dependencies": {
-    "@ant-design/icons": "^5.6.0",
+    "@ant-design/icons": "^6.0.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
     "antd": "^5.23.3",
     "date-fns": "^4.1.0",
+    "identity-obj-proxy": "^3.0.0",
     "lodash": "^4.17.21",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.26.7",
@@ -37,20 +41,24 @@
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
+    "babel-jest": "^29.7.0",
     "eslint": "^8.57.1",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^10.0.1",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-import-resolver-vite": "^2.1.0",
     "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jest": "^28.14.0",
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
     "husky": "^9.1.7",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "lint-staged": "^15.4.3",
     "prettier": "^3.4.2",
-    "vite": "^6.0.5"
+    "vite": "^6.3.5"
   }
 }
