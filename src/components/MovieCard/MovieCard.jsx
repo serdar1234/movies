@@ -22,7 +22,7 @@ function MovieCard({ movie, disabled = false }) {
         <div className="movieDate">{formattedReleaseDate}</div>
         <MovieTags movieGenres={movie.genre_ids} />
       </div>
-      <div className={`movieRating rating${parseInt(rating, 10)}`}>
+      <div className={`movieRating rating${rating}`}>
         <span>{rating}</span>
       </div>
       <div className="movieDescription">
