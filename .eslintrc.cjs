@@ -9,16 +9,7 @@ module.exports = {
     parser: '@babel/eslint-parser',
     requireConfigFile: true,
   },
-  extends: [
-    'airbnb',
-    'airbnb/hooks',
-    'plugin:react/recommended',
-    'eslint:recommended',
-    'prettier',
-    'plugin:prettier/recommended',
-    'plugin:import/errors',
-    'plugin:import/warnings',
-  ],
+  extends: ['airbnb', 'airbnb/hooks', 'plugin:react/recommended', 'eslint:recommended', 'prettier', 'plugin:prettier/recommended', 'plugin:import/errors', 'plugin:import/warnings', 'plugin:storybook/recommended'],
   rules: {
     indent: ['error', 2],
     'prettier/prettier': 'error',
